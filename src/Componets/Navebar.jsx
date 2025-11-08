@@ -1,0 +1,93 @@
+import React from 'react';
+import { NavLink } from 'react-router';
+
+const NavBar = () => {
+  const activeClass = ({ isActive }) => (isActive ? 'text-red-600 font-semibold' : 'text-gray-700');
+
+  const links = (
+    <>
+      <li>
+        <NavLink to="/" className={activeClass}>
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/allproducts" className={activeClass}>
+          All Products
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/profile" className={activeClass}>
+          My Profile
+        </NavLink>
+      </li>
+    </>
+  );
+
+  return (
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Left: brand + mobile menu */}
+          <div className="flex items-center gap-6">
+            <div className="dropdown lg:hidden">
+              <label tabIndex={0} className="btn btn-ghost p-2" aria-label="Open menu">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-3 shadow-lg bg-white rounded-lg w-52"
+              >
+                {links}
+              </ul>
+            </div>
+
+            <NavLink
+              to="/"
+              className="text-2xl font-bold text-red-600 hover:text-red-500 transition duration-200"
+            >
+              MyBrand
+            </NavLink>
+          </div>
+
+          {/* Center: desktop menu */}
+          <div className="hidden lg:flex lg:items-center lg:justify-center">
+            <ul className="menu menu-horizontal px-1 gap-6 text-gray-700 text-lg">{links}</ul>
+          </div>
+
+          {/* Right: actions */}
+          <div className="flex items-center gap-4">
+            <NavLink
+              to={'/loginpage'}
+              className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-600 to-red-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
+            >
+              Login
+            </NavLink>
+
+            <NavLink
+              to={'/registerpage'}
+              className="px-6 py-2 rounded-full font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 transition duration-200 shadow-md"
+            >
+              Register
+            </NavLink>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;
