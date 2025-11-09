@@ -3,12 +3,15 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router'; // <-- react-router-dom
+import { Link, useNavigate } from 'react-router';
+import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const { createEmailAndPass } = useContext(AuthContext);
+  const { createEmailAndPass, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const GoogleProvider = new GoogleAuthProvider();
+  const navegate = useNavigate();
 
   // Signup form
   const handleSignUp = (e) => {
@@ -16,23 +19,46 @@ export default function RegisterPage() {
     const name = e.target?.name?.value;
     const email = e.target?.email?.value;
     const password = e.target?.password?.value;
+    const photo = e.target?.photo?.value;
 
-    console.log({ name, email, password });
-
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        'Password must be at least 6 characters and include uppercase, lowercase, number and special character.'
+      );
+      return;
+    }
+    // sign in with email password
     createEmailAndPass(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success('Register Successfully');
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photo,
+        });
 
+        toast.success('Register Successfully');
         e.target.reset('');
         setTimeout(() => {
-          navigate('/loginpage'), 2000
+          navigate('/loginpage'), 2000;
         });
       })
       .catch((err) => {
         toast.error(err.message);
       });
+  };
+
+  // sign in width google
+  const handleGoogleRegister = () => {
+    signInWithGoogle(GoogleProvider).then((result) => {
+      const user = result.user;
+      console.log({ user });
+
+      navegate('/').cathch((e) => {
+        toast.error(e.message);
+      });
+    });
   };
 
   return (
@@ -63,6 +89,13 @@ export default function RegisterPage() {
                   autoComplete="email"
                   className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
                 />
+                <input
+                  type="text"
+                  name="photo"
+                  placeholder="https//:"
+                  autoComplete="email"
+                  className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
+                />
               </div>
 
               <div>
@@ -85,8 +118,6 @@ export default function RegisterPage() {
                   </button>
                 </div>
               </div>
-
-              {/* Submit button must be type="submit" and inside the form */}
               <button
                 type="submit"
                 className="w-full mt-5 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
@@ -101,7 +132,11 @@ export default function RegisterPage() {
               <hr className="flex-1 border-gray-300" />
             </div>
 
-            <button className="w-full py-3 border rounded-xl flex items-center justify-center gap-2 font-medium hover:bg-gray-50 transition duration-200">
+            <button
+              type="submit"
+              onClick={handleGoogleRegister}
+              className="w-full cursor-pointer py-3 border rounded-xl flex items-center justify-center gap-2 font-medium hover:bg-gray-50 transition duration-200"
+            >
               <FcGoogle size={22} />
               <span>Sign Up with Google</span>
             </button>
