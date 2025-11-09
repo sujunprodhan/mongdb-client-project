@@ -6,6 +6,7 @@ import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 import ProductDetails from "../Pages/ProductDetails";
 import Home from "../Pages/Home";
+import Reset from "../Componets/Reset";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
         path: '/registerpage',
         element: <RegisterPage />
       },
+      {
+        path:'/reset',
+        element:<Reset/>
+      }
     ],
   },
 ]);

@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
+import { AuthContext } from '../AuthProvider/Authprovider';
+import { toast } from 'react-toastify';
 
 const NavBar = () => {
+  const { user, handleSignOut } = useContext(AuthContext);
+
+  const handlesignOutUser = () => {
+    handleSignOut()
+      .then((res) => {
+        console.log(res);
+        toast.success('Sign Out Successfully');
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
   const activeClass = ({ isActive }) => (isActive ? 'text-red-600 font-semibold' : 'text-gray-700');
 
   const links = (
@@ -68,21 +82,35 @@ const NavBar = () => {
             <ul className="menu menu-horizontal px-1 gap-6 text-gray-700 text-lg">{links}</ul>
           </div>
 
-          {/* Right: actions */}
+          {/* Right */}
           <div className="flex items-center gap-4">
-            <NavLink
-              to={'/loginpage'}
-              className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-600 to-red-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
-            >
-              Login
-            </NavLink>
+            {user ? (
+              <div className="flex items-center gap-3">
+                <span className="text-gray-700">{user?.email}</span>
+                <button
+                  onClick={handlesignOutUser}
+                  className="px-4 py-2 rounded-full font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                <NavLink
+                  to="/loginpage"
+                  className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-600 to-red-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
+                >
+                  Login
+                </NavLink>
 
-            <NavLink
-              to={'/registerpage'}
-              className="px-6 py-2 rounded-full font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 transition duration-200 shadow-md"
-            >
-              Register
-            </NavLink>
+                <NavLink
+                  to="/registerpage"
+                  className="px-6 py-2 rounded-full font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 transition duration-200 shadow-md"
+                >
+                  Register
+                </NavLink>
+              </div>
+            )}
           </div>
         </div>
       </div>

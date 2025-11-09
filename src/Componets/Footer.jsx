@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-// import { Facebook, Twitter, Instagram, Mail } from 'react';
 import { LuRotate3D } from 'react-icons/lu';
 
 const Footer = () => {
@@ -112,7 +111,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-200 hover:text-blue-700"
             >
-              {/* <Facebook size={24} /> */}
+              
             </a>
             <a
               href="https://twitter.com"
@@ -120,7 +119,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-200 hover:text-blue-400"
             >
-              {/* <Twitter size={24} /> */}
+            
             </a>
             <a
               href="https://instagram.com"
@@ -128,7 +127,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-200 hover:text-pink-600"
             >
-              {/* <Instagram size={24} /> */}
+          
             </a>
           </div>
           <div>
@@ -136,7 +135,6 @@ const Footer = () => {
               href="mailto:support@nihonlearn.com"
               className="flex items-center text-gray-600 dark:text-gray-200 hover:text-blue-600"
             >
-              {/* <Mail size={18} className="mr-2" /> support@nihonlearn.com */}
             </a>
           </div>
         </div>

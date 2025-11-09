@@ -3,10 +3,12 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router'; // <-- react-router-dom
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const { createEmailAndPass } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // Signup form
   const handleSignUp = (e) => {
@@ -15,16 +17,21 @@ export default function RegisterPage() {
     const email = e.target?.email?.value;
     const password = e.target?.password?.value;
 
-    console.log({ name });
+    console.log({ name, email, password });
 
     createEmailAndPass(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast.success('Register Successfully');
+
+        e.target.reset('');
+        setTimeout(() => {
+          navigate('/loginpage'), 2000
+        });
       })
-      .catch((e) => {
-        toast.error(e.message);
+      .catch((err) => {
+        toast.error(err.message);
       });
   };
 
@@ -72,13 +79,18 @@ export default function RegisterPage() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
               </div>
 
-              <button className="w-full mt-5 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200">
+              {/* Submit button must be type="submit" and inside the form */}
+              <button
+                type="submit"
+                className="w-full mt-5 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
+              >
                 Register Now
               </button>
             </form>
@@ -91,7 +103,7 @@ export default function RegisterPage() {
 
             <button className="w-full py-3 border rounded-xl flex items-center justify-center gap-2 font-medium hover:bg-gray-50 transition duration-200">
               <FcGoogle size={22} />
-              <span>Register with Google</span>
+              <span>Sign Up with Google</span>
             </button>
 
             <p className="text-xs text-center text-gray-500">
@@ -101,7 +113,9 @@ export default function RegisterPage() {
 
             <div className="mt-4 text-center text-sm">
               <span className="text-gray-600">Already have an account?</span>{' '}
-              <button className="ml-2 font-medium text-pink-600">Sign in</button>
+              <Link to="/loginpage" className="ml-2 font-medium text-pink-600">
+                Log in
+              </Link>
             </div>
           </div>
         </div>
