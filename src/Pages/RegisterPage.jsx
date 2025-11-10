@@ -40,9 +40,7 @@ export default function RegisterPage() {
 
         toast.success('Register Successfully');
         e.target.reset('');
-        setTimeout(() => {
-          navigate('/loginpage'), 2000;
-        });
+        navigate('/loginpage');
       })
       .catch((err) => {
         toast.error(err.message);

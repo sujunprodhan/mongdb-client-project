@@ -1,31 +1,35 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+
 
 const Carddesign = ({ property }) => {
-  const { title, image, price, author,_id } = property;
+  const { image, title, price, author, category, location } = property;
 
   return (
-    <div className="w-full max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-      {/* Property Image */}
-      <div className="h-60 w-full overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-        />
-      </div>
-
-      {/* Property Details */}
-      <div className="p-5">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">{title}</h2>
-        <p className="text-pink-600 font-bold text-lg mb-2">Price: {price}</p>
-        <p className="text-gray-600 mb-4">Agent: {author}</p>
-        <NavLink
-          to={`/productdetails/${_id}`}
-          className="w-full bg-pink-600 cursor-pointer text-white py-2 rounded-lg hover:bg-pink-700 transition-colors"
-        >
+    <div>
+      <div className="bg-white border-1 border-gray-300 p-3 rounded-md">
+        <div className="p-3 border-gray-300">
+          <img src={image} alt="" className="rounded-md bg-gray-200 " />
+          <p>{location}</p>
+        </div>
+        <h1 className="text-center text-2xl font-bold text-black">{title}</h1>
+        <div>
+          <p>
+            <span className="text-pink-500 font-semibold">Author:</span>
+            {author}
+          </p>
+        </div>
+        <div className="flex justify-between items-center mt-5">
+          <button className="bg-pink-700 px-2 py-1 rounded-md text-white">
+            Category: <span>{category}</span>{' '}
+          </button>
+          <p>
+            <span className="text-pink-500 font-semibold">$</span>
+            {price}
+          </p>
+        </div>
+        <button className="bg-pink-600  w-full mt-10 text-center py-1 rounded-md text-white">
           View Details
-        </NavLink>
+        </button>
+        
       </div>
     </div>
   );

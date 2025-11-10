@@ -1,7 +1,10 @@
 import React from 'react';
+import WhyChooseUs from '../Componets/WhyChooseUs';
+import HowItWorks from '../Componets/HowItWorks';
 const Home = () => {
   return <div>
-    <h1>Home</h1>
+    <WhyChooseUs/>
+    <HowItWorks/>
   </div>;
 };
 

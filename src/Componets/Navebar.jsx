@@ -35,6 +35,11 @@ const NavBar = () => {
           My Profile
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/updateproduct" className={activeClass}>
+          UpdateProduct
+        </NavLink>
+      </li>
     </>
   );
 
@@ -86,7 +91,9 @@ const NavBar = () => {
           <div className="flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-3">
+                {/* <img src={user.photoURL} alt="" /> */}
                 <span className="text-gray-700">{user?.email}</span>
+                <span className="text-gray-700">{user?.displayName}</span>
                 <button
                   onClick={handlesignOutUser}
                   className="px-4 py-2 rounded-full font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"

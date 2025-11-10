@@ -7,6 +7,8 @@ import RegisterPage from "../Pages/RegisterPage";
 import ProductDetails from "../Pages/ProductDetails";
 import Home from "../Pages/Home";
 import Reset from "../Componets/Reset";
+import UpdateProduct from "../Pages/UpdateProduct";
+import ErrorPage from "../Componets/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -23,25 +25,33 @@ export const router = createBrowserRouter([
         loader: () => fetch('http://localhost:3000/realagent'),
       },
       {
-        path: '/productdetails/:id',
-        element: <ProductDetails />
+        path: '/productdetails',
+        element: <ProductDetails />,
       },
       {
         path: '/profile',
-        element: <Profile />
+        element: <Profile />,
       },
       {
         path: '/loginpage',
-        element: <LoginPage />
+        element: <LoginPage />,
       },
       {
         path: '/registerpage',
-        element: <RegisterPage />
+        element: <RegisterPage />,
       },
       {
-        path:'/reset',
-        element:<Reset/>
-      }
+        path: '/reset',
+        element: <Reset />,
+      },
+      {
+        path: '/updateproduct',
+        element: <UpdateProduct />,
+      },
+      {
+        path: '*',
+        element: <ErrorPage />,
+      },
     ],
   },
 ]);
