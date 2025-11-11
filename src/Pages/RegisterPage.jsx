@@ -50,12 +50,25 @@ export default function RegisterPage() {
   // sign in width google
   const handleGoogleRegister = () => {
     signInWithGoogle(GoogleProvider).then((result) => {
-      const user = result.user;
-      console.log({ user });
+      console.log(result.users);
+      const newUser = {
+        name: result.user.displayName,
+        email: result.user.email,
+        image: result.user.photoURL,
+      };
 
-      navegate('/').cathch((e) => {
-        toast.error(e.message);
-      });
+      fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((res) => res.json())
+        .then((result) => console.log('user data', result)),
+        navegate('/').cathch((e) => {
+          toast.error(e.message);
+        });
     });
   };
 

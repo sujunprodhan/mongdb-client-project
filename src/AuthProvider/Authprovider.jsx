@@ -42,10 +42,8 @@ export const Authprovider = ({ children }) => {
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('user login');
         setUser(user);
       } else {
-        console.log('user signout');
         setUser(null);
       }
     });

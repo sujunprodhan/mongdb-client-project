@@ -4,11 +4,12 @@ import AllProducts from "../Pages/AllProducts";
 import Profile from "../Pages/Profile";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
-import ProductDetails from "../Pages/ProductDetails";
 import Home from "../Pages/Home";
 import Reset from "../Componets/Reset";
 import UpdateProduct from "../Pages/UpdateProduct";
 import ErrorPage from "../Componets/ErrorPage";
+import PropertyDetails from "../Pages/PropertyDetails";
+import MyRatings from "../Componets/MyRatings";
 
 export const router = createBrowserRouter([
   {
@@ -25,8 +26,9 @@ export const router = createBrowserRouter([
         loader: () => fetch('http://localhost:3000/realagent'),
       },
       {
-        path: '/productdetails',
-        element: <ProductDetails />,
+        path: '/propertydetails/:id',
+        element: <PropertyDetails />,
+        loader: ({ params }) => fetch(`http://localhost:3000/realagent/${params.id}`),
       },
       {
         path: '/profile',
@@ -47,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: '/updateproduct',
         element: <UpdateProduct />,
+      },
+      {
+        path:'/myratings',
+        element:<MyRatings/>
       },
       {
         path: '*',

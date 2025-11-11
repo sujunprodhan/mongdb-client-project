@@ -1,6 +1,6 @@
 [
   {
-    "_id": "654a0001a1b2c3d4e5f60001",
+    "id": "654a0001a1b2c3d4e5f60001",
     "title": "Sunny Apartment",
     "category": "Apartment",
     "price": 120000,
@@ -9,7 +9,7 @@
     "author": "John Doe"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60002",
+    "id": "654a0001a1b2c3d4e5f60002",
     "title": "Cozy Cottage",
     "category": "House",
     "price": 95000,
@@ -18,7 +18,7 @@
     "author": "Jane Smith"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60003",
+    "id": "654a0001a1b2c3d4e5f60003",
     "title": "Luxury Villa",
     "category": "Villa",
     "price": 450000,
@@ -27,7 +27,7 @@
     "author": "Alice Johnson"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60004",
+    "id": "654a0001a1b2c3d4e5f60004",
     "title": "Modern Loft",
     "category": "Apartment",
     "price": 180000,
@@ -36,7 +36,7 @@
     "author": "Michael Brown"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60005",
+    "id": "654a0001a1b2c3d4e5f60005",
     "title": "Beachfront Bungalow",
     "category": "House",
     "price": 250000,
@@ -45,7 +45,7 @@
     "author": "Emma Wilson"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60006",
+    "id": "654a0001a1b2c3d4e5f60006",
     "title": "Suburban Home",
     "category": "House",
     "price": 130000,
@@ -54,7 +54,7 @@
     "author": "Oliver Taylor"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60007",
+    "id": "654a0001a1b2c3d4e5f60007",
     "title": "Downtown Studio",
     "category": "Studio",
     "price": 85000,
@@ -63,7 +63,7 @@
     "author": "Sophia Martinez"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60008",
+    "id": "654a0001a1b2c3d4e5f60008",
     "title": "Mountain Cabin",
     "category": "Cabin",
     "price": 90000,
@@ -72,7 +72,7 @@
     "author": "Liam Anderson"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f60009",
+    "id": "654a0001a1b2c3d4e5f60009",
     "title": "Urban Penthouse",
     "category": "Penthouse",
     "price": 500000,
@@ -81,7 +81,7 @@
     "author": "Mia Thomas"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000a",
+    "id": "654a0001a1b2c3d4e5f6000a",
     "title": "Country Farmhouse",
     "category": "Farmhouse",
     "price": 150000,
@@ -90,7 +90,7 @@
     "author": "Ethan Lee"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000b",
+    "id": "654a0001a1b2c3d4e5f6000b",
     "title": "Lakeview Apartment",
     "category": "Apartment",
     "price": 140000,
@@ -99,7 +99,7 @@
     "author": "Ava Harris"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000c",
+    "id": "654a0001a1b2c3d4e5f6000c",
     "title": "Historic Mansion",
     "category": "Mansion",
     "price": 750000,
@@ -108,7 +108,7 @@
     "author": "Noah Clark"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000d",
+    "id": "654a0001a1b2c3d4e5f6000d",
     "title": "City Townhouse",
     "category": "Townhouse",
     "price": 200000,
@@ -117,7 +117,7 @@
     "author": "Isabella Lewis"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000e",
+    "id": "654a0001a1b2c3d4e5f6000e",
     "title": "Coastal Villa",
     "category": "Villa",
     "price": 380000,
@@ -126,7 +126,7 @@
     "author": "James Walker"
   },
   {
-    "_id": "654a0001a1b2c3d4e5f6000f",
+    "id": "654a0001a1b2c3d4e5f6000f",
     "title": "Eco-friendly House",
     "category": "House",
     "price": 175000,

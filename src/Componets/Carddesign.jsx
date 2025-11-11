@@ -1,7 +1,8 @@
+import { Link } from "react-router";
 
 
 const Carddesign = ({ property }) => {
-  const { image, title, price, author, category, location } = property;
+  const { image, title, price, author, category, location, _id } = property;
 
   return (
     <div>
@@ -18,18 +19,17 @@ const Carddesign = ({ property }) => {
           </p>
         </div>
         <div className="flex justify-between items-center mt-5">
-          <button className="bg-pink-700 px-2 py-1 rounded-md text-white">
-            Category: <span>{category}</span>{' '}
+          <button className="rounded-md">
+            <span className="font-semibold text-pink-600">Category:</span> <span>{category}</span>{' '}
           </button>
           <p>
             <span className="text-pink-500 font-semibold">$</span>
             {price}
           </p>
         </div>
-        <button className="bg-pink-600  w-full mt-10 text-center py-1 rounded-md text-white">
-          View Details
-        </button>
-        
+        <div className="bg-pink-600 mt-10 px-5 mt-10 text-center py-1 rounded-md text-white">
+          <Link className="cursor-pointer" to={`/propertydetails/${_id}`}>View Details</Link>
+        </div>
       </div>
     </div>
   );
