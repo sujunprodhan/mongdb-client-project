@@ -78,7 +78,7 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              <Link to={'/profile'}
+              <Link to={'/'}
                 type="submit"
                 className="w-full mt-5 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
               >

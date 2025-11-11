@@ -13,13 +13,20 @@ export const AuthContext = createContext(null);
 
 export const Authprovider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+ 
+  
 
   // sign up email and password
   const createEmailAndPass = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // sign in with email and password
   const signInWithPass = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -43,6 +50,7 @@ export const Authprovider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        setLoading(false);
       } else {
         setUser(null);
       }
@@ -56,7 +64,9 @@ export const Authprovider = ({ children }) => {
     signInWithPass,
     handleSignOut,
     forgetPassword,
-    signInWithGoogle
+    signInWithGoogle,
+    loading,
+    setLoading,
   };
 
   return <AuthContext value={authInformation}>{children}</AuthContext>;

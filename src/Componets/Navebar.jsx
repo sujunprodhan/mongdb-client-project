@@ -96,15 +96,32 @@ const NavBar = () => {
           <div className="flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-3">
-                {/* <img src={user.photoURL} alt="" /> */}
-                <span className="text-gray-700">{user?.email}</span>
-                <span className="text-gray-700">{user?.displayName}</span>
-                <button
-                  onClick={handlesignOutUser}
-                  className="px-4 py-2 rounded-full font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
-                >
-                  Log Out
-                </button>
+                <div>
+                  <img src={user.photoURL} className="h-[50px] w-[50px] rounded-full" alt="" />
+
+                  <ul
+                    className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                    popover="auto"
+                    id="popover-1"
+                    style={{ positionAnchor: '--anchor-1' }}
+                  >
+                    <li>
+                      <a>{user?.displayName}</a>
+                    </li>
+                    <li>
+                      <a>{user?.email}</a>
+                    </li>
+                    <button
+                      onClick={handlesignOutUser}
+                      className="px-4 py-2 rounded-full font-medium bg-red-100 text-red-600 hover:bg-red-200 transition"
+                    >
+                      Log Out
+                    </button>
+                  </ul>
+                </div>
+
+                <span className="text-gray-700"></span>
+                <span className="text-gray-700"></span>
               </div>
             ) : (
               <div className="flex items-center gap-3">

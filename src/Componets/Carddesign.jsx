@@ -6,7 +6,7 @@ const Carddesign = ({ property }) => {
   return (
     <div>
       <div className="bg-white border-1 border-pink-300 hover:shadow p-3 rounded-md">
-        <div className="p-3 border-gray-300">
+        <div className="p-2 border-gray-300">
           <img src={image} alt="" className="rounded-md bg-gray-200 " />
           <p>{location}</p>
         </div>
