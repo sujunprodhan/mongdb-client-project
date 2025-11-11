@@ -16,7 +16,7 @@ const NavBar = () => {
         toast.error(e.message);
       });
   };
-  const activeClass = ({ isActive }) => (isActive ? 'text-red-600 font-semibold' : 'text-gray-700');
+  const activeClass = ({ isActive }) => (isActive ? 'text-pink-600 ' : 'text-black tex-xl');
 
   const links = (
     <>
@@ -26,18 +26,23 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/allproducts" className={activeClass}>
-          All Products
+        <NavLink to="/allpropertise" className={activeClass}>
+          ALL Propertise
         </NavLink>
       </li>
       <li>
-        <NavLink to="/profile" className={activeClass}>
-          My Profile
+        <NavLink to="/addpropertise" className={activeClass}>
+          Add Propertise
         </NavLink>
       </li>
       <li>
-        <NavLink to="/updateproduct" className={activeClass}>
-          UpdateProduct
+        <NavLink to="/mypropertise" className={activeClass}>
+          My Propertise
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/myratings" className={activeClass}>
+          My Ratings
         </NavLink>
       </li>
     </>
@@ -76,7 +81,7 @@ const NavBar = () => {
 
             <NavLink
               to="/"
-              className="text-2xl font-bold text-red-600 hover:text-red-500 transition duration-200"
+              className="text-2xl font-bold text-pink-600 hover:text-pink-500ition duration-200"
             >
               MyBrand
             </NavLink>
@@ -84,7 +89,7 @@ const NavBar = () => {
 
           {/* Center: desktop menu */}
           <div className="hidden lg:flex lg:items-center lg:justify-center">
-            <ul className="menu menu-horizontal px-1 gap-6 text-gray-700 text-lg">{links}</ul>
+            <ul className="menu menu-horizontal px-1 gap-6 text-gray-700 ">{links}</ul>
           </div>
 
           {/* Right */}
@@ -105,14 +110,14 @@ const NavBar = () => {
               <div className="flex items-center gap-3">
                 <NavLink
                   to="/loginpage"
-                  className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-600 to-red-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
+                  className="px-5 py-1 rounded-full font-semibold bg-gradient-to-r from-pink-600 to-pink-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
                 >
                   Login
                 </NavLink>
 
                 <NavLink
                   to="/registerpage"
-                  className="px-6 py-2 rounded-full font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 transition duration-200 shadow-md"
+                  className="px-5 py-1 rounded-full font-semibold border-2 border-pink-600 text-pink-500 hover:bg-red-50 transition duration-200 shadow-md"
                 >
                   Register
                 </NavLink>

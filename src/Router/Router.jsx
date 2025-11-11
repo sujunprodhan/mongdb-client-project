@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Layout from "../MainLayout/Layout";
-import AllProducts from "../Pages/AllProducts";
+import AllProducts from "../Pages/AllPropetise";
 import Profile from "../Pages/Profile";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
@@ -10,6 +10,11 @@ import UpdateProduct from "../Pages/UpdateProduct";
 import ErrorPage from "../Componets/ErrorPage";
 import PropertyDetails from "../Pages/PropertyDetails";
 import MyRatings from "../Componets/MyRatings";
+import AllPropertise from "../Pages/AllPropetise";
+import AddPropertise from "../Pages/Add Propertise/AddPropertise";
+import MyPropertise from "../Pages/My ProPertise/MyPropertise";
+import LatestProperty from "../Pages/LatestProperty/LatestProperty";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +24,11 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
+        loader: () => fetch('http://localhost:3000/latestproperty'),
       },
       {
-        path: '/allproducts',
-        element: <AllProducts />,
+        path: '/allpropertise',
+        element: <AllPropertise />,
         loader: () => fetch('http://localhost:3000/realagent'),
       },
       {
@@ -31,8 +37,12 @@ export const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/realagent/${params.id}`),
       },
       {
-        path: '/profile',
-        element: <Profile />,
+        path: '/addpropertise',
+        element: <AddPropertise />,
+      },
+      {
+        path: '/mypropertise',
+        element: <MyPropertise />,
       },
       {
         path: '/loginpage',
@@ -51,8 +61,16 @@ export const router = createBrowserRouter([
         element: <UpdateProduct />,
       },
       {
-        path:'/myratings',
-        element:<MyRatings/>
+        path: '/myratings',
+        element: (
+          <PrivateRoute>
+            <MyRatings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/latestproperty',
+        element: <LatestProperty />,
       },
       {
         path: '*',

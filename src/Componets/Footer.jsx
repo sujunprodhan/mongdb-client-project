@@ -5,12 +5,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-linear-to-r from-pink-500 to-red-600 py-8 px-4  rounded-xl mt-20">
+    <footer className="bg-linear-to-r from-blue-950 to-blue-700 py-8 px-4  rounded-xl mt-20">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         <div>
           <div className="flex items-center space-x-2 text-white">
             <LuRotate3D size={25} />
-            <span className="text-xl font-bold text-gray-800 dark:text-gray-200">3D Model Hub</span>
+            <span className="text-xl font-bold text-gray-800 dark:text-gray-200">Real Estate Property</span>
           </div>
           <ul className="space-y-2 mt-4">
             <li>

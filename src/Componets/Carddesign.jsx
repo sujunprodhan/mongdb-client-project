@@ -1,12 +1,11 @@
-import { Link } from "react-router";
-
+import { Link } from 'react-router';
 
 const Carddesign = ({ property }) => {
   const { image, title, price, author, category, location, _id } = property;
 
   return (
     <div>
-      <div className="bg-white border-1 border-gray-300 p-3 rounded-md">
+      <div className="bg-white border-1 border-pink-300 hover:shadow p-3 rounded-md">
         <div className="p-3 border-gray-300">
           <img src={image} alt="" className="rounded-md bg-gray-200 " />
           <p>{location}</p>
@@ -28,7 +27,9 @@ const Carddesign = ({ property }) => {
           </p>
         </div>
         <div className="bg-pink-600 mt-10 px-5 mt-10 text-center py-1 rounded-md text-white">
-          <Link className="cursor-pointer" to={`/propertydetails/${_id}`}>View Details</Link>
+          <Link className="cursor-pointer" to={`/propertydetails/${_id}`}>
+            View Details
+          </Link>
         </div>
       </div>
     </div>

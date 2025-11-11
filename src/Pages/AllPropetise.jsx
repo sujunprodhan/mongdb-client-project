@@ -4,8 +4,9 @@ import Carddesign from '../Componets/Carddesign';
 
 
 
-const AllProducts = () => {
+const AllPropertise = () => {
  const realProperty = useLoaderData()
+ 
 
   return (
     <div>
@@ -22,4 +23,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default AllPropertise;
