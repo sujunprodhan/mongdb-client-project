@@ -6,7 +6,6 @@ import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 import Home from '../Pages/Home';
 import Reset from '../Componets/Reset';
-import UpdateProduct from '../Pages/UpdateProduct';
 import ErrorPage from '../Componets/ErrorPage';
 import PropertyDetails from '../Pages/PropertyDetails';
 import MyRatings from '../Componets/MyRatings';
@@ -15,6 +14,7 @@ import AddPropertise from '../Pages/Add Propertise/AddPropertise';
 import MyPropertise from '../Pages/My ProPertise/MyPropertise';
 import LatestProperty from '../Pages/LatestProperty/LatestProperty';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import UpdateProperties from '../Pages/UpdateProperties';
 
 export const router = createBrowserRouter([
   {
@@ -38,13 +38,13 @@ export const router = createBrowserRouter([
             <PropertyDetails />
           </PrivateRoute>
         ),
-        hydrateFallbackElement:(''),
+        hydrateFallbackElement: '',
         loader: async ({ params }) =>
           await fetch(`http://localhost:3000/realagent/${params?.id}`).then((result) =>
             result.json()
           ),
       },
-    
+
       {
         path: '/addpropertise',
         element: (
@@ -74,9 +74,18 @@ export const router = createBrowserRouter([
         element: <Reset />,
       },
       {
-        path: '/updateproduct',
-        element: <UpdateProduct />,
+        path: '/updateproperties/:id',
+        element: (
+          <PrivateRoute>
+            <UpdateProperties />
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) =>
+          await fetch(`http://localhost:3000/realagent/${params?.id}`).then((result) =>
+            result.json()
+          ),
       },
+
       {
         path: '/myratings',
         element: (

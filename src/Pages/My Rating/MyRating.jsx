@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../contexts/AuthProvider'; // adjust path
-import RatingCard from '../components/RatingCard'; // adjust path
-
+import { AuthContext } from '../contexts/AuthProvider'; 
+import RatingCard from '../components/RatingCard'; 
 export default function MyRatings() {
   const { user, token } = useContext(AuthContext); // token assumed available in context
   const [ratings, setRatings] = useState([]);

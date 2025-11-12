@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 export default function PropertyDetails() {
   const propertyData = useLoaderData() || {};
-  
-  const { image, title, price, description, location, category, author, postedAt } = propertyData;
+
+  const { image, title, price, description, location, category, author, postedAt, _id } = propertyData;
 
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: '', text: '', rating: 5 });
@@ -200,8 +200,18 @@ export default function PropertyDetails() {
               <li>• Avg rating: {avgRating}</li>
             </ul>
           </div>
-          <button>Delete Now</button>
-          <button>Update Property</button>
+          <div className="mt-6 flex flex-col text-center gap-3">
+            <Link
+              to={`/updateproperties/${_id}`}
+              className='className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-pink-600 hover:bg-pink-700 duration-500 transition-colors"'
+            >
+              {' '}
+              Update Property
+            </Link>
+            <button className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-red-600 hover:bg-red-700 duration-500 transition-colors">
+              Delete Property
+            </button>
+          </div>
         </aside>
       </div>
     </div>
