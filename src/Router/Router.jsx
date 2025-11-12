@@ -38,12 +38,13 @@ export const router = createBrowserRouter([
             <PropertyDetails />
           </PrivateRoute>
         ),
-        // hydrateFallbackElement:<p>Loading.....</p>,
+        hydrateFallbackElement:(''),
         loader: async ({ params }) =>
           await fetch(`http://localhost:3000/realagent/${params?.id}`).then((result) =>
             result.json()
           ),
       },
+    
       {
         path: '/addpropertise',
         element: (

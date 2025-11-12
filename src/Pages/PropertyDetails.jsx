@@ -188,7 +188,6 @@ export default function PropertyDetails() {
 
             <div className="mt-4 text-sm text-gray-500">
               <p>Posted: {postedDate}</p>
-              {/* <p className="mt-2 text-pink-600">Agent: {author ? author : 'Anonymous'}</p> */}
             </div>
           </div>
 

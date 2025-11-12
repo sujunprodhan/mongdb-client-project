@@ -50,11 +50,13 @@ export const Authprovider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        setLoading(false);
+        
       } else {
         setUser(null);
       }
+      setLoading(false);
     });
+    
     return () => unsubcribe();
   }, []);
 

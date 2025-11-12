@@ -97,19 +97,26 @@ const NavBar = () => {
             {user ? (
               <div className="flex items-center gap-3">
                 <div>
-                  <img src={user.photoURL} className="h-[50px] w-[50px] rounded-full" alt="" />
+                  {/* change popover-1 and --anchor-1 names. Use unique names for each dropdown */}
+                  {/* For TSX uncomment the commented types below */}
+                  <button
+                    popoverTarget="popover-1"
+                    style={{ anchorName: '--anchor-1' } /* as React.CSSProperties */}
+                  >
+                    <img src={user.photoURL} className="h-[40px] w-[40px] rounded-full" alt="" />
+                  </button>
 
                   <ul
-                    className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                    className="dropdown menu w-50 rounded-md bg-base-100 shadow-sm"
                     popover="auto"
                     id="popover-1"
-                    style={{ positionAnchor: '--anchor-1' }}
+                    style={{ positionAnchor: '--anchor-1' } /* as React.CSSProperties */}
                   >
                     <li>
-                      <a>{user?.displayName}</a>
+                      <span className="text-gray-700">{user?.displayName}</span>
                     </li>
                     <li>
-                      <a>{user?.email}</a>
+                      <span className="text-gray-700">{user?.email}</span>
                     </li>
                     <button
                       onClick={handlesignOutUser}
@@ -119,15 +126,12 @@ const NavBar = () => {
                     </button>
                   </ul>
                 </div>
-
-                <span className="text-gray-700"></span>
-                <span className="text-gray-700"></span>
               </div>
             ) : (
               <div className="flex items-center gap-3">
                 <NavLink
                   to="/loginpage"
-                  className="px-5 py-1 rounded-full font-semibold bg-gradient-to-r from-pink-600 to-pink-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
+                  className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 to-pink-500 text-white hover:opacity-95 transition duration-200 shadow-lg"
                 >
                   Login
                 </NavLink>
