@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../contexts/AuthProvider'; 
-import RatingCard from '../components/RatingCard'; 
+import { AuthContext } from '../contexts/AuthProvider';
+import RatingCard from '../components/RatingCard';
 export default function MyRatings() {
-  const { user, token } = useContext(AuthContext); // token assumed available in context
+  const { user, token } = useContext(AuthContext);
   const [ratings, setRatings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch user's ratings from backend
+  // User's ratings from backend
   useEffect(() => {
     if (!user?.email) {
       setRatings([]);
@@ -29,7 +29,6 @@ export default function MyRatings() {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              // include token if your backend requires authentication
               ...(token ? { Authorization: `Bearer ${token}` } : {}),
             },
             signal: controller.signal,
@@ -39,7 +38,6 @@ export default function MyRatings() {
         if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
 
         const data = await res.json();
-        // Expecting data to be an array of ratings
         setRatings(Array.isArray(data) ? data : []);
       } catch (err) {
         if (err.name !== 'AbortError') setError(err.message || 'Failed to load ratings');
@@ -53,7 +51,6 @@ export default function MyRatings() {
     return () => controller.abort();
   }, [user?.email, token]);
 
-  // Delete rating handler (optimistic)
   const handleDelete = async (ratingId) => {
     const confirmed = window.confirm('Are you sure you want to delete this review?');
     if (!confirmed) return;
@@ -73,9 +70,7 @@ export default function MyRatings() {
         }
       );
       if (!res.ok) throw new Error('Failed to delete on server');
-      // success - nothing else to do because UI already updated
     } catch (err) {
-      // rollback
       setRatings(prev);
       alert('Could not delete review. Please try again.');
       console.error(err);
