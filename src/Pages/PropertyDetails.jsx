@@ -1,24 +1,24 @@
-import React, { useMemo, useState, useEffect, use } from 'react';
+import React, { useMemo, useState, useEffect, useContext } from 'react';
 import { Link, useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import Swal from 'sweetalert2';
 
-
 const PropertyDetails = () => {
   const propertyData = useLoaderData() || {};
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const { image, title, price, description, location, category, author, postedAt, _id } =
     propertyData;
 
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: '', text: '', rating: 5 });
-const naveget = useNavigate()
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!_id) return;
     fetch(`http://localhost:3000/reviews/${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
-      .catch((err) => console.error(err));
+      .catch(() => {});
   }, [_id]);
 
   const postedDate = useMemo(() => {
@@ -38,7 +38,7 @@ const naveget = useNavigate()
 
     const payload = {
       propertyId: _id,
-      email: user.email,
+      email: user?.email || '',
       name: form.name.trim(),
       rating: form.rating,
       text: form.text.trim(),
@@ -55,7 +55,7 @@ const naveget = useNavigate()
       const data = await res.json();
       setReviews(data);
     } catch (err) {
-      console.error(err);
+      // handle error silently or show UI feedback
     }
   }
 
@@ -72,55 +72,47 @@ const naveget = useNavigate()
       if (result.isConfirmed) {
         fetch(`http://localhost:3000/realagent/${_id}`, {
           method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            Swal.fire({
-              title: 'Deleted!',
-              text: 'Your file has been deleted.',
-              icon: 'success',
-            });
-            naveget('/allpropertise')
+          .then(() => {
+            Swal.fire({ title: 'Deleted!', text: 'Property has been deleted.', icon: 'success' });
+            navigate('/allpropertise');
           })
-          .catch((err) => {
-            console.log(err.message);
+          .catch(() => {
+            Swal.fire({ title: 'Error', text: 'Failed to delete property.', icon: 'error' });
           });
       }
     });
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 lg:p-10">
-      <div className="mb-6">
-        <h1 className="text-3xl lg:text-4xl font-extrabold">{title}</h1>
+    <div className="max-w-6xl mx-auto p-4 md:p-6 lg:p-10">
+      <div className="mb-4">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">{title}</h1>
         <p className="mt-2 text-sm text-gray-500">
-          <span className="text-xl">{location}</span>
+          <span className="text-base sm:text-xl">{location}</span>
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
               src={image}
               alt={title}
-              className="text-black w-full h-80 md:h-[28rem] object-cover"
+              className="w-full h-64 sm:h-80 md:h-[28rem] object-cover"
             />
           </div>
 
-          <div className="mt-6 bg-white rounded-2xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold mb-3">Property Description</h2>
+          <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">Property Description</h2>
             <p className="text-gray-700 leading-relaxed">{description}</p>
 
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <h3 className="text-sm text-pink-600">Price</h3>
                 <p className="font-semibold text-lg">
-                  {price ? `\$${price.toLocaleString()}` : 'more details'}
+                  {price ? `$${price.toLocaleString()}` : 'more details'}
                 </p>
               </div>
 
@@ -131,12 +123,12 @@ const naveget = useNavigate()
 
               <div>
                 <h3 className="text-sm text-pink-600">Posted by</h3>
-                <p className="font-medium">{author ? author : 'Anonymous'}</p>
+                <p className="font-medium">{author || 'Anonymous'}</p>
               </div>
             </div>
           </div>
 
-          <div className="mt-6">
+          <div>
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold">Ratings & Reviews</h3>
@@ -156,12 +148,12 @@ const naveget = useNavigate()
                     <div className="flex items-start justify-between">
                       <div>
                         <p className="font-semibold">{r.name}</p>
-                        <div className="text-yellow-500 mt-1">
-                          {Array.from({ length: rating }).map((_, i) => (
-                            <span key={i}>★</span>
-                          ))}
-                          {Array.from({ length: 5 - rating }).map((_, i) => (
-                            <span key={i} className="text-gray-300">
+                        <div className="mt-1">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <span
+                              key={i}
+                              className={i < rating ? 'text-yellow-500' : 'text-gray-300'}
+                            >
                               ★
                             </span>
                           ))}
@@ -177,7 +169,7 @@ const naveget = useNavigate()
               })}
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6 bg-white p-5 rounded-xl shadow-sm">
+            <form onSubmit={handleSubmit} className="mt-6 bg-white p-4 sm:p-5 rounded-xl shadow-sm">
               <h4 className="font-semibold mb-3">Leave a review</h4>
 
               <input
@@ -227,12 +219,12 @@ const naveget = useNavigate()
         </div>
 
         <aside className="space-y-6">
-          <div className="sticky top-6 bg-white rounded-2xl p-6 shadow-md">
+          <div className="sticky top-6 bg-white rounded-2xl p-4 sm:p-6 shadow-md">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-pink-600">Price</p>
-                <p className="text-2xl font-extrabold">
-                  {price ? `\$${price.toLocaleString()}` : 'Contact'}
+                <p className="text-xl sm:text-2xl font-extrabold">
+                  {price ? `$${price.toLocaleString()}` : 'Contact'}
                 </p>
               </div>
               <div className="text-right">
@@ -241,10 +233,10 @@ const naveget = useNavigate()
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <button
-                className="w-full py-3 rounded-xl font-semibold"
-                style={{ backgroundColor: '#F0256E', color: 'white' }}
+                className="w-full py-3 rounded-xl font-semibold text-white"
+                style={{ backgroundColor: '#F0256E' }}
               >
                 Contact Agent
               </button>
@@ -264,10 +256,11 @@ const naveget = useNavigate()
               <li>• Avg rating: {avgRating}</li>
             </ul>
           </div>
-          <div className="mt-6 flex flex-col text-center gap-3">
+
+          <div className="mt-4 flex flex-col text-center gap-3">
             <Link
               to={`/updateproperties/${_id}`}
-              className='className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-pink-600 hover:bg-pink-700 duration-500 transition-colors"'
+              className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-pink-600 hover:bg-pink-700 duration-500 transition-colors"
             >
               Update Property
             </Link>

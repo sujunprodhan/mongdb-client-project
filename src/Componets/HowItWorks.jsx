@@ -27,7 +27,7 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2, duration: 0.5 }}
-              className="bg-white rounded-xl p-5 border-1 border-pink-600"
+              className="bg-white rounded-xl p-5 border border-pink-600"
             >
               <div className="w-12 h-12 rounded-full bg-[#F02670] text-white flex items-center justify-center font-semibold">
                 {i + 1}

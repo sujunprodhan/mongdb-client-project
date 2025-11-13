@@ -78,34 +78,42 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen mt-10 flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-10">
-          <h1 className="text-3xl font-bold text-center mb-8 text-pink-600">Login Here</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
+      <div className="w-full max-w-lg">
+        <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-pink-600">
+            Login Here
+          </h1>
 
-          <form onSubmit={handleLogIn} className="space-y-5">
+          <form onSubmit={handleLogIn} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
               <input
+                id="email"
                 type="email"
                 name="email"
                 value={emailValue}
                 onChange={(e) => setEmailValue(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
+                Password
+              </label>
               <div className="relative">
                 <input
+                  id="password"
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   placeholder="Enter your password"
                   required
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl pr-12 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl pr-12 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
                 />
                 <button
                   type="button"
@@ -116,14 +124,17 @@ const LoginPage = () => {
                   {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </button>
               </div>
+
               <p className="text-sm text-center text-gray-500 mt-4">
                 Forgot your password?{' '}
-                <button
+                <Link
+                  to="/forgetpassword"
+                  type="button"
                   onClick={handlePasswordReset}
                   className="underline text-pink-600 font-semibold"
                 >
                   Reset here
-                </button>
+                </Link>
               </p>
             </div>
 
@@ -131,11 +142,11 @@ const LoginPage = () => {
               type="submit"
               className="w-full py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
             >
-              Login Now
+              Log In
             </button>
           </form>
 
-          <div className="my-5 flex items-center gap-2">
+          <div className="my-4 flex items-center gap-2">
             <hr className="flex-1 border-gray-300" />
             <span className="text-sm text-gray-400">or</span>
             <hr className="flex-1 border-gray-300" />

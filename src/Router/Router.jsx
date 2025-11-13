@@ -1,21 +1,20 @@
 import { createBrowserRouter } from 'react-router';
 import Layout from '../MainLayout/Layout';
-import AllProducts from '../Pages/AllPropetise';
-import Profile from '../Pages/Profile';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 import Home from '../Pages/Home';
+import AllPropertise from '../Pages/AllPropetise';
 import Reset from '../Componets/Reset';
 import ErrorPage from '../Componets/ErrorPage';
 import PropertyDetails from '../Pages/PropertyDetails';
-import MyRatings from '../Componets/MyRatings';
-import AllPropertise from '../Pages/AllPropetise';
 import AddPropertise from '../Pages/Add Propertise/AddPropertise';
 import MyPropertise from '../Pages/My ProPertise/MyPropertise';
 import LatestProperty from '../Pages/LatestProperty/LatestProperty';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import UpdateProperties from '../Pages/UpdateProperties';
 import MyRating from '../Pages/My Rating/MyRating';
+import Profile from '../Pages/Profile';
+import ForgetPassword from '../Componets/ForgetPassword';
 
 export const router = createBrowserRouter([
   {
@@ -94,8 +93,16 @@ export const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
+        path:'/forgetpassword',
+        element:<ForgetPassword/>
+      },
+      {
         path: '/latestproperty',
         element: <LatestProperty />,
+      },
+      {
+        path:'/profile',
+        element:<Profile/>
       },
       {
         path: '*',

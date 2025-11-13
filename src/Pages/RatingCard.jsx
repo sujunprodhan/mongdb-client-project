@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RatingCard  = () => {
+const RatingCard = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const RatingCard  = () => {
   );
 };
 
-export default RatingCard ;
+export default RatingCard;

@@ -41,8 +41,24 @@ export const Authprovider = ({ children }) => {
   };
 
   // Forget Password
-  const forgetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Email Sent!',
+          text: 'Password reset email has been sent. Check your inbox.',
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+        });
+      })
+      .finally(() => setLoading(false));
   };
 
   // On Auth State change
@@ -65,10 +81,11 @@ export const Authprovider = ({ children }) => {
     createEmailAndPass,
     signInWithPass,
     handleSignOut,
-    forgetPassword,
+   resetPassword,
     signInWithGoogle,
     loading,
     setLoading,
+    
   };
 
   return <AuthContext value={authInformation}>{children}</AuthContext>;

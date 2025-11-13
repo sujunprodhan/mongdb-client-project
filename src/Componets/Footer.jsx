@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from '../assets/logo.svg'; // make sure your logo path is correct
+import logo from '../assets/logo.svg';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
   return (
     <footer className="relative mt-10 bg-gray-900 text-white">
-      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
@@ -13,8 +12,7 @@ const Footer = () => {
         }}
       ></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Logo & website name */}
+      <div className="relative max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div className="flex flex-col items-start gap-4">
           <img src={logo} alt="Logo" className="h-12 w-auto bg-pink-600 p-1 rounded-md" />
           <h2 className="text-xl font-bold text-white">Your Website Name</h2>
@@ -23,7 +21,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Contact Details */}
         <div>
           <h3 className="text-lg font-semibold mb-4 text-white">Contact Us</h3>
           <ul className="text-gray-300 space-y-2 text-sm">
@@ -33,7 +30,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Terms & Conditions */}
         <div>
           <h3 className="text-lg font-semibold mb-4 text-white">Legal</h3>
           <ul className="text-gray-300 space-y-2 text-sm">
@@ -50,7 +46,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social Media */}
         <div>
           <h3 className="text-lg font-semibold mb-4 text-white">Follow Us</h3>
           <div className="flex gap-4 text-[#E60076] text-xl">
