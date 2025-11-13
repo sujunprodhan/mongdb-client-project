@@ -1,157 +1,73 @@
-import { Link } from 'react-router';
-import { LuRotate3D } from 'react-icons/lu';
+import React from 'react';
+import logo from '../assets/logo.svg'; // make sure your logo path is correct
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-linear-to-r from-blue-950 to-blue-700 py-8 px-4  rounded-xl mt-20">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+    <footer className="relative mt-10 bg-gray-900 text-white">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1770&q=80')`,
+        }}
+      ></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Logo & website name */}
+        <div className="flex flex-col items-start gap-4">
+          <img src={logo} alt="Logo" className="h-12 w-auto bg-pink-600 p-1 rounded-md" />
+          <h2 className="text-xl font-bold text-white">Your Website Name</h2>
+          <p className="text-gray-300 text-sm">
+            &copy; {new Date().getFullYear()} All Rights Reserved
+          </p>
+        </div>
+
+        {/* Contact Details */}
         <div>
-          <div className="flex items-center space-x-2 text-white">
-            <LuRotate3D size={25} />
-            <span className="text-xl font-bold text-gray-800 dark:text-gray-200">Real Estate Property</span>
-          </div>
-          <ul className="space-y-2 mt-4">
+          <h3 className="text-lg font-semibold mb-4 text-white">Contact Us</h3>
+          <ul className="text-gray-300 space-y-2 text-sm">
+            <li>Phone: +880 1234 567 890</li>
+            <li>Email: info@yourwebsite.com</li>
+            <li>Address: 123, Street, City, Country</li>
+          </ul>
+        </div>
+
+        {/* Terms & Conditions */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4 text-white">Legal</h3>
+          <ul className="text-gray-300 space-y-2 text-sm">
             <li>
-              <Link
-                to="/all-models"
-                className="text-gray-600 dark:text-gray-200 hover:text-blue-600"
-              >
-                All Models
-              </Link>
+              <a href="/terms" className="hover:text-[#E60076] transition">
+                Terms & Conditions
+              </a>
             </li>
             <li>
-              <Link
-                to="/add-model"
-                className="text-gray-600 dark:text-gray-200 hover:text-blue-600"
-              >
-                Add Model
-              </Link>
-            </li>
-            <li>
-              <Link to="/profile" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/auth/login"
-                className="text-gray-600 dark:text-gray-200 hover:text-blue-600"
-              >
-                Login
-              </Link>
+              <a href="/privacy" className="hover:text-[#E60076] transition">
+                Privacy Policy
+              </a>
             </li>
           </ul>
         </div>
 
+        {/* Social Media */}
         <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Resources</h3>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Learning Blog
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Guides
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Poly Tips
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/resources"
-                className="text-gray-600 dark:text-gray-200 hover:text-blue-600"
-              >
-                Resources
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Community</h3>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Discussion Forums
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Study Groups
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Events & Workshops
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">
-                Leaderboard
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">
-            Connect With Us
-          </h3>
-          <div className="flex space-x-4 mb-4">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-200 hover:text-blue-700"
-            >
-              
+          <h3 className="text-lg font-semibold mb-4 text-white">Follow Us</h3>
+          <div className="flex gap-4 text-[#E60076] text-xl">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <FaFacebookF />
             </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-200 hover:text-blue-400"
-            >
-            
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <FaTwitter />
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-200 hover:text-pink-600"
-            >
-          
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <FaInstagram />
             </a>
-          </div>
-          <div>
-            <a
-              href="mailto:support@nihonlearn.com"
-              className="flex items-center text-gray-600 dark:text-gray-200 hover:text-blue-600"
-            >
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <FaLinkedinIn />
             </a>
           </div>
         </div>
-      </div>
-
-      <div className="border-t lg:mb-0 md:mb-0 mb-20 border-[#fa7171] mt-8 pt-4 text-center">
-        <p className="text-sm text-gray-600 dark:text-gray-200">
-          © {currentYear} 3D Model Hub Learn. All Rights Reserved.
-          <span className="ml-4">
-            <Link to="/" className="hover:text-blue-600 mr-3">
-              Privacy Policy
-            </Link>
-            <Link to="/" className="hover:text-blue-600">
-              Terms of Service
-            </Link>
-          </span>
-        </p>
       </div>
     </footer>
   );

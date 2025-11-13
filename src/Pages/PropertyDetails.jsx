@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useEffect, use } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import Swal from 'sweetalert2';
+
 
 const PropertyDetails = () => {
   const propertyData = useLoaderData() || {};
@@ -11,7 +12,7 @@ const PropertyDetails = () => {
 
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: '', text: '', rating: 5 });
-
+const naveget = useNavigate()
   useEffect(() => {
     if (!_id) return;
     fetch(`http://localhost:3000/reviews/${_id}`)
@@ -70,7 +71,7 @@ const PropertyDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`http://localhost:3000/realagent/${_id}`, {
-          method: 'Deleted',
+          method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -83,6 +84,7 @@ const PropertyDetails = () => {
               text: 'Your file has been deleted.',
               icon: 'success',
             });
+            naveget('/allpropertise')
           })
           .catch((err) => {
             console.log(err.message);

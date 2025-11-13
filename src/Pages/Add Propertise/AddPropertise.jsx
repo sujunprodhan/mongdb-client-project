@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/Authprovider';
+import { toast } from 'react-toastify';
+import { Navigate } from 'react-router';
+
 
 export default function AddPropertise() {
   const { user } = useContext(AuthContext);
-
   const hadleSubmit = (e) => {
     e.preventDefault();
     const fromData = {
@@ -26,6 +28,7 @@ export default function AddPropertise() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast.success('Added Property Successfully')
       })
       .catch((err) => {
         console.log(err);

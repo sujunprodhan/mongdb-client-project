@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import { toast } from 'react-toastify';
+import logo from '../assets/logo.svg'
 
 const NavBar = () => {
   const { user, handleSignOut } = useContext(AuthContext);
@@ -82,7 +83,7 @@ const NavBar = () => {
               to="/"
               className="text-2xl font-bold text-pink-600 hover:text-pink-500ition duration-200"
             >
-              MyBrand
+              <img src={logo} alt="" className='bg-pink-600 px-5 py-1 rounded-md'/>
             </NavLink>
           </div>
 
@@ -94,10 +95,7 @@ const NavBar = () => {
             {user ? (
               <div className="flex items-center gap-3">
                 <div>
-                  <button
-                    popoverTarget="popover-1"
-                    style={{ anchorName: '--anchor-1' }}
-                  >
+                  <button popoverTarget="popover-1" style={{ anchorName: '--anchor-1' }}>
                     <img src={user.photoURL} className="h-[40px] w-[40px] rounded-full" alt="" />
                   </button>
 

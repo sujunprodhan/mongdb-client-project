@@ -27,12 +27,12 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2, duration: 0.5 }}
-              className="bg-white rounded-xl p-5 border"
+              className="bg-white rounded-xl p-5 border-1 border-pink-600"
             >
               <div className="w-12 h-12 rounded-full bg-[#F02670] text-white flex items-center justify-center font-semibold">
                 {i + 1}
               </div>
-              <h4 className="mt-4 font-semibold">{title}</h4>
+              <h4 className="mt-4 font-semibold text-pink-600">{title}</h4>
               <p className="text-gray-500 text-sm mt-1">
                 {i === 0
                   ? 'Filter by category, price & location.'

@@ -12,7 +12,6 @@ const LatestProperty = ({ latest }) => {
   return (
     <div className="w-11/12 mx-auto">
       <div className="bg-white border border-pink-300 hover:shadow-lg p-3 rounded-md transition-all duration-300">
-        {/* Image section */}
         <div className="relative overflow-hidden rounded-md">
           <img
             src={image}
@@ -26,19 +25,11 @@ const LatestProperty = ({ latest }) => {
             <span>{location}</span>
           </div>
         </div>
-
-        {/* Title */}
         <h1 className="text-center text-2xl font-bold text-black mt-3">{title}</h1>
-
-        {/* Author */}
         <p className="text-gray-600">
           <span className="text-pink-500 font-semibold">Author:</span> {author}
         </p>
-
-        {/* Short description */}
         <p className="text-gray-500 text-sm mt-2">{shortDesc}</p>
-
-        {/* Category and Price */}
         <div className="flex justify-between items-center mt-4">
           <button className="rounded-md text-sm">
             <span className="font-semibold text-pink-600">Category:</span> {category}
@@ -47,8 +38,6 @@ const LatestProperty = ({ latest }) => {
             <span className="text-pink-500">$</span> {price}
           </p>
         </div>
-
-        {/* View Details Button */}
         <div className="bg-pink-600 mt-6 px-5 py-2 text-center rounded-md text-white hover:bg-pink-700 transition">
           <Link className="cursor-pointer" to={`/propertydetails/${_id}`}>
             View Details
