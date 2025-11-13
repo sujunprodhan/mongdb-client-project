@@ -1,10 +1,11 @@
 import React, { useMemo, useState, useEffect, use } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import { AuthContext } from '../AuthProvider/Authprovider';
+import Swal from 'sweetalert2';
 
-const PropertyDetails =() => {
+const PropertyDetails = () => {
   const propertyData = useLoaderData() || {};
-  const {user} = use(AuthContext)
+  const { user } = use(AuthContext);
   const { image, title, price, description, location, category, author, postedAt, _id } =
     propertyData;
 
@@ -36,7 +37,7 @@ const PropertyDetails =() => {
 
     const payload = {
       propertyId: _id,
-      email:user.email,
+      email: user.email,
       name: form.name.trim(),
       rating: form.rating,
       text: form.text.trim(),
@@ -56,6 +57,39 @@ const PropertyDetails =() => {
       console.error(err);
     }
   }
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/realagent/${_id}`, {
+          method: 'Deleted',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
+            });
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto p-6 lg:p-10">
@@ -235,7 +269,10 @@ const PropertyDetails =() => {
             >
               Update Property
             </Link>
-            <button className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-red-600 hover:bg-red-700 duration-500 transition-colors">
+            <button
+              onClick={handleDelete}
+              className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-red-600 hover:bg-red-700 duration-500 transition-colors"
+            >
               Delete Property
             </button>
           </div>
@@ -243,6 +280,6 @@ const PropertyDetails =() => {
       </div>
     </div>
   );
-}
+};
 
-export default PropertyDetails
+export default PropertyDetails;
