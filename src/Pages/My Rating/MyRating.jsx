@@ -1,109 +1,117 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../contexts/AuthProvider';
-import RatingCard from '../components/RatingCard';
-export default function MyRatings() {
-  const { user, token } = useContext(AuthContext);
-  const [ratings, setRatings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router';
+import { AuthContext } from '../../AuthProvider/Authprovider';
 
-  // User's ratings from backend
+const MyRating = () => {
+  const { user } = useContext(AuthContext);
+  const [items, setItems] = useState([]);
+
   useEffect(() => {
-    if (!user?.email) {
-      setRatings([]);
-      setLoading(false);
-      return;
-    }
-
-    const controller = new AbortController();
-    const fetchRatings = async () => {
-      setLoading(true);
-      setError(null);
-
+    if (!user?.email) return;
+    let cancelled = false;
+    const fetchAll = async () => {
       try {
-        const res = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL || ''}/api/ratings?userEmail=${encodeURIComponent(
-            user.email
-          )}`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              ...(token ? { Authorization: `Bearer ${token}` } : {}),
-            },
-            signal: controller.signal,
-          }
+        const propRes = await axios.get(`http://localhost:3000/realagent?email=${user.email}`);
+        const properties = Array.isArray(propRes.data)
+          ? propRes.data
+          : propRes.data.properties ?? [];
+
+        const reviewPromises = properties.map((p) =>
+          fetch(`http://localhost:3000/reviews/${p._id}`)
+            .then((r) => r.json())
+            .then((data) => {
+              const arr = Array.isArray(data) ? data : data.reviews ?? [];
+              return arr.map((rev) => ({
+                ...rev,
+                rating: Number(rev.rating) || 0,
+                property: { _id: p._id, title: p.title, image: p.image, location: p.location },
+              }));
+            })
+            .catch(() => [])
         );
 
-        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+        const reviewsArrays = await Promise.all(reviewPromises);
+        const flat = reviewsArrays.flat();
+        flat.sort((a, b) => {
+          const ta = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const tb = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return tb - ta;
+        });
 
-        const data = await res.json();
-        setRatings(Array.isArray(data) ? data : []);
+        if (!cancelled) setItems(flat);
       } catch (err) {
-        if (err.name !== 'AbortError') setError(err.message || 'Failed to load ratings');
+        console.error(err);
       } finally {
-        setLoading(false);
       }
     };
 
-    fetchRatings();
-
-    return () => controller.abort();
-  }, [user?.email, token]);
-
-  const handleDelete = async (ratingId) => {
-    const confirmed = window.confirm('Are you sure you want to delete this review?');
-    if (!confirmed) return;
-
-    const prev = [...ratings];
-    setRatings((r) => r.filter((item) => item._id !== ratingId));
-
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL || ''}/api/ratings/${ratingId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-        }
-      );
-      if (!res.ok) throw new Error('Failed to delete on server');
-    } catch (err) {
-      setRatings(prev);
-      alert('Could not delete review. Please try again.');
-      console.error(err);
-    }
-  };
+    fetchAll();
+    const interval = setInterval(fetchAll, 5000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [user]);
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4">My Ratings</h2>
+    <div className="max-w-5xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-6 text-pink-600">My Reviews</h2>
 
-      {loading && <div className="py-12 text-center text-gray-500">Loading your ratings...</div>}
+      <div className="grid gap-4">
+        {items.map((review) => {
+          const key = review._id || `${review.reviewerEmail}-${review.createdAt}`;
+          const shortText =
+            review.text?.length > 120
+              ? review.text.slice(0, 120) + '...'
+              : review.text || 'No text';
+          return (
+            <div
+              key={key}
+              className="flex gap-4 p-3 border border-pink-600 rounded-xl shadow-sm hover:shadow-md transition"
+            >
+              <Link to={`/properties/${review.property?._id || ''}`} className="flex-shrink-0">
+                <img
+                  src={review.property?.image}
+                  alt={review.property?.title}
+                  className="w-30 h-30 object-cover rounded-md"
+                />
+              </Link>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded mb-4">{error}</div>
-      )}
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg">{review.property?.title}</h3>
+                <p className="text-gray-700 mt-1">{shortText}</p>
 
-      {!loading && !error && ratings.length === 0 && (
-        <div className="text-center text-gray-600 py-16">
-          <p className="mb-3">You haven't left any ratings yet.</p>
-          <p className="text-sm">Visit a property to leave your first review.</p>
-        </div>
-      )}
+                <div className="flex items-center mt-2">
+                  <span className="text-yellow-500 mr-2">
+                    {Array.from({ length: 5 }).map((_, i) => {
+                      const idx = i + 1;
+                      return (
+                        <span key={i} className={idx <= review.rating ? '' : 'text-gray-300'}>
+                          ★
+                        </span>
+                      );
+                    })}
+                  </span>
+                  <small className="text-gray-400 text-pink-600">
+                    {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : 'No date'}
+                  </small>
+                </div>
 
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {ratings.map((rating) => (
-          <RatingCard
-            key={rating._id}
-            rating={rating}
-            onDelete={() => handleDelete(rating._id)}
-            currentUser={user}
-          />
-        ))}
+                <p className="text-sm text-pink-600 mt-1">
+                  Reviewed by:{' '}
+                  <span className="font-medium text-gray-400">
+                    {review.reviewerName || review.reviewerEmail || 'Anonymous'}
+                  </span>{' '}
+                  
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
-}
+};
+
+export default MyRating;

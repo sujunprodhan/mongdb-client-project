@@ -15,6 +15,7 @@ import MyPropertise from '../Pages/My ProPertise/MyPropertise';
 import LatestProperty from '../Pages/LatestProperty/LatestProperty';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import UpdateProperties from '../Pages/UpdateProperties';
+import MyRating from '../Pages/My Rating/MyRating';
 
 export const router = createBrowserRouter([
   {
@@ -87,12 +88,10 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: '/myratings',
-        element: (
-          <PrivateRoute>
-            <MyRatings />
-          </PrivateRoute>
-        ),
+        path:'/myrating',
+        element:<PrivateRoute>
+          <MyRating/>
+        </PrivateRoute>
       },
       {
         path: '/latestproperty',

@@ -8,7 +8,7 @@ export default function AddPropertise() {
     e.preventDefault();
     const fromData = {
       title: e.target.title.value,
-      category: e.target.email.vlaue,
+      email: e.target.email.vlaue,
       description: e.target.description.value,
       price: e.target.price.value,
       location: e.target.location.value,
@@ -31,6 +31,9 @@ export default function AddPropertise() {
         console.log(err);
       });
   };
+
+
+
 
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mt-6">
@@ -64,10 +67,16 @@ export default function AddPropertise() {
             name="category"
             className="w-full border rounded-md p-2 focus:ring-2 focus:ring-pink-400 outline-none"
           >
-            <option>Rent</option>
-            <option>Sale</option>
-            <option>Commercial</option>
-            <option>Land</option>
+            <option value="">Slect Category</option>
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Mansion">Mansion</option>
+            <option value="Farmhouse">Farmhouse</option>
+            <option value="Penthouse">Penthouse</option>
+            <option value="Cabin">Cabin</option>
+            <option value="Studio">Studio</option>
+            <option value="Villa">Villa</option>
           </select>
         </div>
 

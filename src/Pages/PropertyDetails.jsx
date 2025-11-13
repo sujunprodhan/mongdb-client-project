@@ -1,13 +1,23 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, use } from 'react';
 import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../AuthProvider/Authprovider';
 
-export default function PropertyDetails() {
+const PropertyDetails =() => {
   const propertyData = useLoaderData() || {};
-
-  const { image, title, price, description, location, category, author, postedAt, _id } = propertyData;
+  const {user} = use(AuthContext)
+  const { image, title, price, description, location, category, author, postedAt, _id } =
+    propertyData;
 
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: '', text: '', rating: 5 });
+
+  useEffect(() => {
+    if (!_id) return;
+    fetch(`http://localhost:3000/reviews/${_id}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch((err) => console.error(err));
+  }, [_id]);
 
   const postedDate = useMemo(() => {
     if (postedAt) return new Date(postedAt).toLocaleDateString();
@@ -16,20 +26,35 @@ export default function PropertyDetails() {
 
   const avgRating = useMemo(() => {
     if (!reviews.length) return 0;
-    return (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+    const sum = reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0);
+    return (sum / reviews.length).toFixed(1);
   }, [reviews]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!form.name.trim() || !form.text.trim()) return;
-    const newReview = {
-      id: Date.now(),
+
+    const payload = {
+      propertyId: _id,
+      email:user.email,
       name: form.name.trim(),
       rating: form.rating,
       text: form.text.trim(),
     };
-    setReviews((r) => [newReview, ...r]);
-    setForm({ name: '', text: '', rating: 5 });
+
+    try {
+      await fetch('http://localhost:3000/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      setForm({ name: '', text: '', rating: 5 });
+      const res = await fetch(`http://localhost:3000/reviews/${_id}`);
+      const data = await res.json();
+      setReviews(data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
@@ -87,33 +112,38 @@ export default function PropertyDetails() {
             </div>
 
             <div className="mt-4 space-y-4">
-              {reviews.map((r) => (
-                <div key={r.id} className="p-4 bg-white rounded-xl shadow-sm">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className="font-semibold">{r.name}</p>
-                      <div className="text-yellow-500 mt-1">
-                        {Array.from({ length: r.rating }).map((_, i) => (
-                          <span key={i}>★</span>
-                        ))}
-                        {Array.from({ length: 5 - r.rating }).map((_, i) => (
-                          <span key={i} className="text-gray-300">
-                            ★
-                          </span>
-                        ))}
+              {reviews.map((r) => {
+                const key = r._id ?? r.id ?? Math.random();
+                const rating = Number(r.rating) || 0;
+                return (
+                  <div key={key} className="p-4 bg-white rounded-xl shadow-sm">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="font-semibold">{r.name}</p>
+                        <div className="text-yellow-500 mt-1">
+                          {Array.from({ length: rating }).map((_, i) => (
+                            <span key={i}>★</span>
+                          ))}
+                          {Array.from({ length: 5 - rating }).map((_, i) => (
+                            <span key={i} className="text-gray-300">
+                              ★
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
+                    <p className="mt-3 text-gray-700">{r.text}</p>
+                    <small className="text-gray-400">
+                      {r.createdAt ? new Date(r.createdAt).toLocaleString() : ''}
+                    </small>
                   </div>
-                  <p className="mt-3 text-gray-700">{r.text}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Review Form */}
             <form onSubmit={handleSubmit} className="mt-6 bg-white p-5 rounded-xl shadow-sm">
               <h4 className="font-semibold mb-3">Leave a review</h4>
 
-              {/* Name Input */}
               <input
                 className="w-full border border-gray-200 rounded-md p-2 focus:outline-none"
                 placeholder="Your name"
@@ -121,7 +151,6 @@ export default function PropertyDetails() {
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               />
 
-              {/* Star Rating */}
               <div className="mt-3 flex gap-1">
                 {Array.from({ length: 5 }).map((_, i) => {
                   const starValue = i + 1;
@@ -140,7 +169,6 @@ export default function PropertyDetails() {
                 })}
               </div>
 
-              {/* Review Text */}
               <textarea
                 className="w-full mt-3 border border-gray-200 rounded-md p-3 focus:outline-none"
                 rows={4}
@@ -205,7 +233,6 @@ export default function PropertyDetails() {
               to={`/updateproperties/${_id}`}
               className='className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-pink-600 hover:bg-pink-700 duration-500 transition-colors"'
             >
-              {' '}
               Update Property
             </Link>
             <button className="w-full py-3 rounded-xl font-semibold text-white cursor-pointer bg-red-600 hover:bg-red-700 duration-500 transition-colors">
@@ -217,3 +244,5 @@ export default function PropertyDetails() {
     </div>
   );
 }
+
+export default PropertyDetails

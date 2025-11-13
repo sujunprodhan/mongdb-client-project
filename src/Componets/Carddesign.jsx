@@ -6,7 +6,7 @@ const Carddesign = ({ property }) => {
 
 
   const shortDesc = description
-    ? description.split(' ').slice(0, 20).join(' ') + '...'
+    ? description.split(' ').slice(0, 10).join(' ') + '...'
     : 'Beautiful property with all essential features and modern design, perfect for comfortable living.';
 
   return (

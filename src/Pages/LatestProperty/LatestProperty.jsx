@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { HiOutlineLocationMarker } from 'react-icons/hi'; // Location icon
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 const LatestProperty = ({ latest }) => {
   const { image, title, price, author, category, location, _id, description } = latest;
 
-  // Generate short description (first 20 words)
   const shortDesc = description
     ? description.split(' ').slice(0, 20).join(' ') + '...'
     : 'Beautiful new property with modern design, perfect for comfortable living and convenient location.';

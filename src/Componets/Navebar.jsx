@@ -41,8 +41,8 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/myratings" className={activeClass}>
-          My Ratings
+        <NavLink to="/myrating" className={activeClass}>
+          My Rating
         </NavLink>
       </li>
     </>
@@ -52,7 +52,6 @@ const NavBar = () => {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left: brand + mobile menu */}
           <div className="flex items-center gap-6">
             <div className="dropdown lg:hidden">
               <label tabIndex={0} className="btn btn-ghost p-2" aria-label="Open menu">
@@ -91,17 +90,13 @@ const NavBar = () => {
           <div className="hidden lg:flex lg:items-center lg:justify-center">
             <ul className="menu menu-horizontal px-1 gap-6 text-gray-700 ">{links}</ul>
           </div>
-
-          {/* Right */}
           <div className="flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-3">
                 <div>
-                  {/* change popover-1 and --anchor-1 names. Use unique names for each dropdown */}
-                  {/* For TSX uncomment the commented types below */}
                   <button
                     popoverTarget="popover-1"
-                    style={{ anchorName: '--anchor-1' } /* as React.CSSProperties */}
+                    style={{ anchorName: '--anchor-1' }}
                   >
                     <img src={user.photoURL} className="h-[40px] w-[40px] rounded-full" alt="" />
                   </button>
