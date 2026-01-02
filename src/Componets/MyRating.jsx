@@ -12,13 +12,15 @@ const MyRating = () => {
     let cancelled = false;
     const fetchAll = async () => {
       try {
-        const propRes = await axios.get(`http://localhost:3000/realagent?email=${user.email}`);
+        const propRes = await axios.get(
+          `https://mongodb-server-site.vercel.app/realagent?email=${user.email}`
+        );
         const properties = Array.isArray(propRes.data)
           ? propRes.data
           : propRes.data.properties ?? [];
 
         const reviewPromises = properties.map((p) =>
-          fetch(`http://localhost:3000/reviews/${p._id}`)
+          fetch(`https://mongodb-server-site.vercel.app/reviews/${p._id}`)
             .then((r) => r.json())
             .then((data) => {
               const arr = Array.isArray(data) ? data : data.reviews ?? [];
@@ -56,8 +58,7 @@ const MyRating = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-pink-600">My Reviews</h2>
-
+      <h2 className="text-2xl font-bold mb-6 text-pink-600">All Reviews</h2>
       <div className="grid gap-4">
         {items.map((review) => {
           const key = review._id || `${review.reviewerEmail}-${review.createdAt}`;

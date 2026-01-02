@@ -15,7 +15,7 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     if (!_id) return;
-    fetch(`http://localhost:3000/reviews/${_id}`)
+    fetch(`https://mongodb-server-site.vercel.app/reviews/${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch(() => {});
@@ -45,17 +45,17 @@ const PropertyDetails = () => {
     };
 
     try {
-      await fetch('http://localhost:3000/reviews', {
+      await fetch('https://mongodb-server-site.vercel.app/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
       setForm({ name: '', text: '', rating: 5 });
-      const res = await fetch(`http://localhost:3000/reviews/${_id}`);
+      const res = await fetch(`https://mongodb-server-site.vercel.app/reviews/${_id}`);
       const data = await res.json();
       setReviews(data);
     } catch (err) {
-      // handle error silently or show UI feedback
+
     }
   }
 
@@ -70,7 +70,7 @@ const PropertyDetails = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/realagent/${_id}`, {
+        fetch(`https://mongodb-server-site.vercel.app/realagent/${_id}`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
         })

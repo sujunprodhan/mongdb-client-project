@@ -57,7 +57,7 @@ const RegisterPage = () => {
           image: result.user?.photoURL || '',
         };
 
-        fetch('http://localhost:3000/users', {
+        fetch('https://mongodb-server-site.vercel.app/users', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(newUser),
@@ -151,7 +151,7 @@ const RegisterPage = () => {
 
             <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
+              className="w-full py-3 bg-linear-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
             >
               Register Now
             </button>

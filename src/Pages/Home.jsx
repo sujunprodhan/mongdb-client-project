@@ -10,8 +10,6 @@ import WhyChooseUs from '../Componets/WhyChooseUs';
 import HowItWorks from '../Componets/HowItWorks';
 import LatestProperty from './LatestProperty/LatestProperty';
 import BrandMarquee from './My ProPertise/BrandMarquee';
-import ReviewSection from './My ProPertise/ReviewSection';
-
 import slider1 from '../assets/project_img_1.jpg';
 import slider2 from '../assets/project_img_2.jpg';
 import slider3 from '../assets/project_img_3.jpg';
@@ -100,8 +98,6 @@ const Home = () => {
       <div className="mt-10 mb-10">
         <BrandMarquee />
       </div>
-
-      <ReviewSection />
     </div>
   );
 };

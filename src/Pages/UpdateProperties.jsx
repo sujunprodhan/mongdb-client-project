@@ -21,7 +21,7 @@ const UpdateProperties = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/realagent/${_id}`, {
+      const res = await fetch(`https://mongodb-server-site.vercel.app/realagent/${_id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

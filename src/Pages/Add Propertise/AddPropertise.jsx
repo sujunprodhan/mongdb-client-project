@@ -3,7 +3,6 @@ import { AuthContext } from '../../AuthProvider/Authprovider';
 import { toast } from 'react-toastify';
 import { Navigate } from 'react-router';
 
-
 export default function AddPropertise() {
   const { user } = useContext(AuthContext);
   const hadleSubmit = (e) => {
@@ -15,10 +14,10 @@ export default function AddPropertise() {
       price: e.target.price.value,
       location: e.target.location.value,
       image: e.target.image.value,
-      category: e.target.category.value
+      category: e.target.category.value,
     };
-    
-    fetch('http://localhost:3000/realagent', {
+
+    fetch('https://mongodb-server-site.vercel.app/realagent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,15 +27,12 @@ export default function AddPropertise() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success('Added Property Successfully')
+        toast.success('Added Property Successfully');
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-
-
 
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mt-6">

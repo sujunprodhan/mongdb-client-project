@@ -15,6 +15,7 @@ import UpdateProperties from '../Pages/UpdateProperties';
 import MyRating from '../Pages/My Rating/MyRating';
 import Profile from '../Pages/Profile';
 import ForgetPassword from '../Componets/ForgetPassword';
+import Dashboard from '../Pages/DashboardLayouts/Dashboard';
 
 export const router = createBrowserRouter([
   {
@@ -24,24 +25,20 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:3000/latestproperty'),
+        loader: () => fetch('https://mongodb-server-site.vercel.app/latestproperty'),
       },
       {
         path: '/allpropertise',
         element: <AllPropertise />,
-        loader: () => fetch('http://localhost:3000/realagent'),
+        loader: () => fetch('https://mongodb-server-site.vercel.app/realagent'),
       },
       {
         path: '/propertydetails/:id',
-        element: (
-          <PrivateRoute>
-            <PropertyDetails />
-          </PrivateRoute>
-        ),
+        element: <PropertyDetails />,
         hydrateFallbackElement: '',
         loader: async ({ params }) =>
-          await fetch(`http://localhost:3000/realagent/${params?.id}`).then((result) =>
-            result.json()
+          await fetch(`https://mongodb-server-site.vercel.app/realagent/${params?.id}`).then(
+            (result) => result.json()
           ),
       },
 
@@ -81,28 +78,35 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          await fetch(`http://localhost:3000/realagent/${params?.id}`).then((result) =>
-            result.json()
+          await fetch(`https://mongodb-server-site.vercel.app/realagent/${params?.id}`).then(
+            (result) => result.json()
           ),
       },
 
       {
-        path:'/myrating',
-        element:<PrivateRoute>
-          <MyRating/>
-        </PrivateRoute>
+        path: '/myrating',
+        element: (
+          <PrivateRoute>
+            <MyRating />
+          </PrivateRoute>
+        ),
       },
+
       {
-        path:'/forgetpassword',
-        element:<ForgetPassword/>
+        path: '/forgetpassword',
+        element: <ForgetPassword />,
       },
       {
         path: '/latestproperty',
         element: <LatestProperty />,
       },
       {
-        path:'/profile',
-        element:<Profile/>
+        path: '/dashboard',
+        element:<Dashboard/>
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
       },
       {
         path: '*',

@@ -20,7 +20,7 @@ const LoginPage = () => {
 
     signInWithPass(email, password)
       .then(() => {
-        toast.success('Login Successful!');
+        toast.success('Login Successful!')
         navigate('/profile');
         e.target.reset();
         setEmailValue('');
@@ -39,7 +39,7 @@ const LoginPage = () => {
           image: result.user?.photoURL || '',
         };
 
-        fetch('http://localhost:3000/users', {
+        fetch('https://mongodb-server-site.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',

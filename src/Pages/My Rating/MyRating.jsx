@@ -12,13 +12,15 @@ const MyRating = () => {
     let cancelled = false;
     const fetchAll = async () => {
       try {
-        const propRes = await axios.get(`http://localhost:3000/realagent?email=${user.email}`);
+        const propRes = await axios.get(
+          `https://mongodb-server-site.vercel.app/realagent?email=${user.email}`
+        );
         const properties = Array.isArray(propRes.data)
           ? propRes.data
           : propRes.data.properties ?? [];
 
         const reviewPromises = properties.map((p) =>
-          fetch(`http://localhost:3000/reviews/${p._id}`)
+          fetch(`https://mongodb-server-site.vercel.app/reviews/${p._id}`)
             .then((r) => r.json())
             .then((data) => {
               const arr = Array.isArray(data) ? data : data.reviews ?? [];
@@ -103,7 +105,6 @@ const MyRating = () => {
                   <span className="font-medium text-gray-400">
                     {review.reviewerName || review.reviewerEmail || 'Anonymous'}
                   </span>{' '}
-                  
                 </p>
               </div>
             </div>

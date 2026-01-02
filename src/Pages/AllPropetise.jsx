@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useLoaderData } from 'react-router';
 import Carddesign from '../Componets/Carddesign';
+import HeroImg from '../assets/header_img.png'
 
 const AllPropertise = () => {
   const realProperty = useLoaderData() || [];
@@ -20,9 +21,15 @@ const AllPropertise = () => {
 
   return (
     <div className="min-h-screen">
-      <section className="w-full h-48 sm:h-56 md:h-64 lg:h-72 flex items-center justify-center text-white relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#EA0D83]/80 to-black/30" />
-        <h1 className="relative text-2xl sm:text-3xl md:text-4xl font-bold">All Property</h1>
+      <section className="w-full h-48 sm:h-56 md:h-64 lg:h-72 flex items-center justify-center relative">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${HeroImg})` }}
+        ></div>
+
+        <h1 className="relative text-3xl sm:text-3xl md:text-4xl font-bold text-pink-600 z-10">
+          All Property
+        </h1>
       </section>
 
       <div className="w-11/12 mx-auto my-6">

@@ -32,6 +32,7 @@ export const Authprovider = ({ children }) => {
 
   // sign out
   const handleSignOut = () => {
+    setLoading(true)
     return signOut(auth);
   };
 
@@ -66,7 +67,7 @@ export const Authprovider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        
+        setLoading(false)
       } else {
         setUser(null);
       }
