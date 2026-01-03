@@ -20,16 +20,16 @@ createRoot(document.getElementById('root')).render(
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light" // or "dark" jodi dark mode use koro
+        theme="light"
         toastStyle={{
-          background: 'linear-gradient(to right, #ec4899, #a855f7)', // pink to purple gradient
-          color: 'pink',
+          background: 'linear-gradient(to right, #ec4899, #a855f7)',
+          color: '#ffff',
           fontWeight: 'bold',
           borderRadius: '16px',
           boxShadow: '0 10px 25px -5px rgba(236, 72, 153, 0.4)',
         }}
         progressStyle={{
-          background: '#F22891',
+          background: '#DF0183',
         }}
         closeButtonStyle={{
           color: 'white',

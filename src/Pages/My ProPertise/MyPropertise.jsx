@@ -28,13 +28,13 @@ const MyPropertise = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <section className="relative h-96 md:h-[32rem] flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+      <section className="relative h-96 md:h-128 flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${HeroImg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/80" />
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-20 left-20 w-96 h-96 bg-pink-400 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -67,7 +67,7 @@ const MyPropertise = () => {
               <p className="text-2xl text-gray-600 mb-8">You haven't added any properties yet.</p>
               <Link
                 to="/addpropertise"
-                className="inline-block px-10 py-5 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-bold rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-500"
+                className="inline-block px-10 py-5 bg-linear-to-r from-pink-600 to-purple-600 text-white text-xl font-bold rounded-full shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-500"
               >
                 Add Your First Property
               </Link>
@@ -82,7 +82,7 @@ const MyPropertise = () => {
                 Your Listed Properties <span className='text-pink-600'>({properties.length})</span>
               </motion.h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols md:grid-cols-3  gap-8">
                 {properties.map((property, index) => (
                   <motion.div
                     key={property._id}

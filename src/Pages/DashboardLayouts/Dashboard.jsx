@@ -23,7 +23,7 @@ import PropertyCard from '../My ProPertise/PropertyCard';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
-  const { user, logOut } = useContext(AuthContext); 
+  const { user, handleSignOut } = useContext(AuthContext); 
   const [activeSection, setActiveSection] = useState('dashboard'); 
   const [properties, setProperties] = useState([]);
 
@@ -65,9 +65,7 @@ const Dashboard = () => {
     },
   };
 
-  const handleSignOut = () => {
-    if (logOut) logOut();
-  };
+  
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -138,7 +136,10 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
               <div className="bg-white p-6 rounded-xl shadow-lg text-center border-t-4 border-pink-500">
                 <p className="text-gray-600">
-                  Total Properties Added <br /> <span className='text-pink-600 font-semibold text-3xl'>({properties.length})</span>
+                  Total Properties Added <br />{' '}
+                  <span className="text-pink-600 font-semibold text-3xl">
+                    ({properties.length})
+                  </span>
                 </p>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg text-center border-t-4 border-pink-500">
@@ -192,7 +193,7 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold text-gray-800 mb-8">
               My Properties <span className="text-pink-600">({properties.length})</span>
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div>
               <div className="w-full mx-auto mt-6 grid grid-cols-3  gap-6 mt-10">
                 {properties?.map((property) => (
                   <PropertyCard key={property._id} property={property}></PropertyCard>

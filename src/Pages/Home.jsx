@@ -106,7 +106,7 @@ const Home = () => {
       </Swiper>
 
       {/* Latest Properties Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 ">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ const Home = () => {
 
       <WhyChooseUs />
       <HowItWorks />
-      <div className="py-10 bg-gray-50">
+      <div className="py-10">
         <BrandMarquee />
       </div>
       <div>

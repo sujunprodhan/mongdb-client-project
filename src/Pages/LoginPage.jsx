@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import subscription from '../assets/newsletter.png';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -58,8 +59,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex p-10 items-center justify-center relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-600 to-pink-700">
-      {/* Floating blur orbs - Dribbble style particles */}
+    <div
+      className="relative py-20 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${subscription})` }}
+    >
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-80 h-80 bg-pink-400 rounded-full blur-3xl opacity-50 animate-pulse" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-40 animate-pulse delay-1000" />
@@ -67,8 +70,8 @@ const LoginPage = () => {
       </div>
 
       {/* Glassmorphism Card */}
-      <div className="relative z-10 w-full max-w-lg mx-4">
-        <div className="backdrop-blur-2xl bg-white/15 border border-white/20 rounded-3xl shadow-2xl p-10 sm:p-12">
+      <div className=" z-10 w-full mx-auto max-w-lg">
+        <div className="backdrop-blur-2xl bg-white/5 border border-white/20 rounded-3xl shadow-2xl p-10 sm:p-12">
           <div className="text-center mb-10">
             <h1 className="text-5xl font-black text-white mb-3">Sign In</h1>
             <p className="text-pink-100 text-lg">Welcome back to your account</p>
@@ -112,7 +115,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full py-5 bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold text-xl rounded-2xl shadow-xl hover:shadow-pink-500/60 transform hover:scale-105 hover:from-pink-600 hover:to-pink-700 transition-all duration-300"
+              className="w-full py-5 bg-linear-to-r from-pink-500 to-pink-600 text-white font-bold text-xl rounded-2xl shadow-md hover:shadow-pink-500/60 transform hover:from-pink-600 hover:to-pink-600 transition-all duration-300"
             >
               Log In
             </button>

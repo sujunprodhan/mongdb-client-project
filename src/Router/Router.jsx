@@ -16,6 +16,7 @@ import MyRating from '../Pages/My Rating/MyRating';
 import Profile from '../Pages/Profile';
 import ForgetPassword from '../Componets/ForgetPassword';
 import Dashboard from '../Pages/DashboardLayouts/Dashboard';
+import About from '../Pages/AboutSection/About';
 
 export const router = createBrowserRouter([
   {
@@ -28,17 +29,21 @@ export const router = createBrowserRouter([
         loader: () => fetch('https://mongodb-server-site.vercel.app/latestproperty'),
       },
       {
+        path: '/about',
+        element: <About></About>,
+      },
+      {
         path: '/allpropertise',
         element: <AllPropertise />,
         loader: () => fetch('https://mongodb-server-site.vercel.app/realagent'),
       },
       {
-        path: '/propertydetails/:id',
+        path: '/propertydetailes/:id',
         element: <PropertyDetails />,
         hydrateFallbackElement: '',
         loader: async ({ params }) =>
           await fetch(`https://mongodb-server-site.vercel.app/realagent/${params?.id}`).then(
-            (result) => result.json()
+            (result) => result?.json()
           ),
       },
 
@@ -102,7 +107,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element:<Dashboard/>
+        element: <Dashboard />,
       },
       {
         path: '/profile',

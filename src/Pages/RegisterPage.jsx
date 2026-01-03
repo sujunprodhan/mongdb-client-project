@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../AuthProvider/Authprovider';
 import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
+import subscription from '../assets/newsletter.png';
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -59,14 +60,15 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br p-10 from-pink-600 via-purple-700 to-pink-800">
+    <div className="relative py-20 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${subscription})` }}>
       <div className="absolute inset-0 opacity-40">
         <div className="absolute top-0 left-0 w-96 h-96 bg-pink-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-700" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-600 rounded-full blur-3xl opacity-60" />
       </div>
-      <div className="relative z-10 w-full max-w-lg mx-4">
-        <div className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 sm:p-12">
+      <div className="relative z-10 w-full max-w-lg mx-auto">
+        <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl p-10 sm:p-12">
           <div className="text-center mb-10">
             <h1 className="text-5xl font-black text-white mb-3">Create Account</h1>
             <p className="text-pink-200 text-lg">Join us today!</p>
@@ -86,14 +88,14 @@ const RegisterPage = () => {
               name="email"
               placeholder="Email Address"
               required
-              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-white text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
             />
 
             <input
               type="url"
               name="photo"
               placeholder="Photo URL (optional)"
-              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-gray-300 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
             />
 
             <div className="relative">
@@ -102,7 +104,7 @@ const RegisterPage = () => {
                 name="password"
                 placeholder="Password"
                 required
-                className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg pr-16 focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+                className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-gray-300 text-lg pr-16 focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
               />
               <button
                 type="button"
@@ -115,7 +117,7 @@ const RegisterPage = () => {
 
             <button
               type="submit"
-              className="w-full py-5 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xl rounded-2xl shadow-xl hover:shadow-pink-500/50 transform hover:scale-105 hover:from-pink-600 hover:to-purple-700 transition-all duration-300"
+              className="w-full py-5 bg-linear-to-r from-pink-500 to-pink-600 text-white font-bold text-xl rounded-2xl shadow-md hover:shadow-pink-500/60 transform hover:from-pink-600 hover:to-pink-600 transition-all duration-300"
             >
               Register Now
             </button>

@@ -13,10 +13,10 @@ const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8];
 
 const BrandMarquee = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+    <section className="py-16 overflow-hidden">
       {/* Title */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-600">
           Trusted by Leading{' '}
           <span className="bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
             Brands & Partners

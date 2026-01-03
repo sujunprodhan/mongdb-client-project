@@ -8,7 +8,7 @@ import logo from '../assets/logo.svg';
 const NavBar = () => {
   const activeClass = ({ isActive }) =>
     isActive
-      ? 'text-pink-600 font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-pink-500 after:to-purple-600 after:rounded-full'
+      ? 'text-pink-600 font-bold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-pink-600 after:to-pink-600 after:rounded-full'
       : 'text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-500 transition-colors duration-200';
 
   const { user, handleSignOut } = useContext(AuthContext);
@@ -72,6 +72,9 @@ const NavBar = () => {
             </NavLink>
             <NavLink to="/allpropertise" className={activeClass}>
               All Properties
+            </NavLink>
+            <NavLink to="/about" className={activeClass}>
+              About
             </NavLink>
 
             {user && (

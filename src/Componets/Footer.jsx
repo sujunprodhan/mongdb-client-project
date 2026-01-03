@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FiMapPin } from 'react-icons/fi';
 
 const Footer = () => {
   return (
@@ -27,14 +28,10 @@ const Footer = () => {
                 alt="Logo"
                 className="h-14 w-auto bg-pink-600 p-2 rounded-lg shadow-lg"
               />
-              <h2 className="text-2xl font-black">Your Real Estate</h2>
             </div>
             <p className="text-gray-300 leading-relaxed max-w-xs">
               Leading real estate platform connecting buyers and sellers with premium properties
               worldwide.
-            </p>
-            <p className="text-sm text-gray-400">
-              &copy; {new Date().getFullYear()} All Rights Reserved
             </p>
           </div>
 
@@ -51,7 +48,10 @@ const Footer = () => {
                 <span className="text-pink-400">✉️</span> info@yourrealestate.com
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-pink-400">📍</span> 123 Luxury Street, Dhaka, Bangladesh
+                <span className="text-pink-400">
+                  <FiMapPin />
+                </span>{' '}
+                123 Luxury Street, Dhaka, Bangladesh
               </li>
             </ul>
           </div>
@@ -133,7 +133,9 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/20 text-center text-gray-400 text-sm">
-          Designed with ❤️ for modern real estate experiences
+          <p className="text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} All Rights Reserved
+          </p>
         </div>
       </div>
     </footer>
