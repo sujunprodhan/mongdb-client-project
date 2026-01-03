@@ -8,8 +8,6 @@ import {
   FaSignOutAlt,
 } from 'react-icons/fa';
 import { AuthContext } from '../../AuthProvider/Authprovider';
-
-// Chart.js imports
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,8 +18,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { Link } from 'react-router';
 import PropertyCard from '../My ProPertise/PropertyCard';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -40,7 +36,6 @@ const Dashboard = () => {
         .catch((err) => console.log(err));
     }, [user?.email]);
 
-  // Dummy data - real app e context/firebase theke nibe
   const propertiesAdded = 12;
   const pendingReviews = 5;
   const totalLikes = 1259;

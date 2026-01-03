@@ -18,8 +18,6 @@ const LatestProperty = ({ latest }) => {
             alt={title}
             className="rounded-md bg-gray-200 w-full h-56 object-cover transform transition-transform duration-500 hover:scale-110"
           />
-
-          {/* Location overlay */}
           <div className="absolute bottom-2 left-2 flex items-center bg-white bg-opacity-80 px-2 py-1 rounded-md text-gray-800 text-sm">
             <HiOutlineLocationMarker className="text-pink-600 mr-1" />
             <span>{location}</span>

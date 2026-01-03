@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { AuthContext } from '../AuthProvider/Authprovider';
-import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash, FaApple } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../AuthProvider/Authprovider';
 import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
 
 const RegisterPage = () => {
@@ -14,38 +14,29 @@ const RegisterPage = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    const name = e.target?.name?.value || '';
-    const email = e.target?.email?.value || '';
-    const password = e.target?.password?.value || '';
-    const photo = e.target?.photo?.value || '';
+    const name = e.target.name.value || '';
+    const email = e.target.email.value || '';
+    const password = e.target.password.value || '';
+    const photo = e.target.photo.value || '';
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error(
-        'Password must be at least 6 characters and include uppercase, lowercase, number and special character.'
-      );
+      toast.error('Password must be 6+ chars with uppercase, lowercase, number & special char.');
       return;
     }
 
     createEmailAndPass(email, password)
       .then((result) => {
         const user = result.user;
-        updateProfile(user, {
-          displayName: name,
-          photoURL: photo,
-        })
+        updateProfile(user, { displayName: name, photoURL: photo })
           .then(() => {
-            toast.success('Registered successfully');
+            toast.success('Registered successfully! 🎉');
             e.target.reset();
             navigate('/loginpage');
           })
-          .catch((err) => {
-            toast.error(err.message);
-          });
+          .catch((err) => toast.error(err.message));
       })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+      .catch((err) => toast.error(err.message));
   };
 
   const handleGoogleRegister = () => {
@@ -56,133 +47,106 @@ const RegisterPage = () => {
           email: result.user?.email || '',
           image: result.user?.photoURL || '',
         };
-
         fetch('https://mongodb-server-site.vercel.app/users', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(newUser),
         })
-          .then((res) => res.json())
-          .then(() => {
-            navigate('/');
-          })
-          .catch((err) => {
-            toast.error(err.message);
-          });
+          .then(() => navigate('/'))
+          .catch((err) => toast.error(err.message));
       })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+      .catch((err) => toast.error(err.message));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-pink-600">
-            Register Here
-          </h1>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br p-10 from-pink-600 via-purple-700 to-pink-800">
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-pink-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-700" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-600 rounded-full blur-3xl opacity-60" />
+      </div>
+      <div className="relative z-10 w-full max-w-lg mx-4">
+        <div className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 sm:p-12">
+          <div className="text-center mb-10">
+            <h1 className="text-5xl font-black text-white mb-3">Create Account</h1>
+            <p className="text-pink-200 text-lg">Join us today!</p>
+          </div>
 
-          <form onSubmit={handleSignUp} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Name
-              </label>
+          <form onSubmit={handleSignUp} className="space-y-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              required
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+            />
+
+            <input
+              type="url"
+              name="photo"
+              placeholder="Photo URL (optional)"
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
+            />
+
+            <div className="relative">
               <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Your full name"
-                autoComplete="name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                required
+                className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg pr-16 focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:bg-white/20 transition"
               />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                autoComplete="email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="photo" className="block text-sm font-medium mb-2">
-                Photo URL (optional)
-              </label>
-              <input
-                id="photo"
-                name="photo"
-                type="url"
-                placeholder="https://example.com/photo.jpg"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  autoComplete="new-password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl pr-12 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-300"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((s) => !s)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-pink-200 hover:text-white text-2xl"
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-linear-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
+              className="w-full py-5 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xl rounded-2xl shadow-xl hover:shadow-pink-500/50 transform hover:scale-105 hover:from-pink-600 hover:to-purple-700 transition-all duration-300"
             >
               Register Now
             </button>
           </form>
 
-          <div className="my-4 flex items-center gap-2">
-            <hr className="flex-1 border-gray-300" />
-            <span className="text-sm text-gray-400">or</span>
-            <hr className="flex-1 border-gray-300" />
+          <div className="my-10 flex items-center">
+            <div className="flex-1 h-px bg-white/30" />
+            <span className="px-6 text-pink-200 font-medium">or sign up with</span>
+            <div className="flex-1 h-px bg-white/30" />
           </div>
 
-          <button
-            type="button"
-            onClick={handleGoogleRegister}
-            className="w-full py-3 border rounded-xl flex items-center justify-center gap-2 font-medium hover:bg-gray-50 transition duration-200"
-          >
-            <FcGoogle size={22} />
-            <span>Sign Up with Google</span>
-          </button>
+          <div className="grid grid-cols-2 gap-5">
+            <button
+              onClick={handleGoogleRegister}
+              className="py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center gap-4 hover:bg-white/20 transition"
+            >
+              <FcGoogle size={28} />
+              <span className="text-white font-semibold">Google</span>
+            </button>
+            <button className="py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center gap-4 hover:bg-white/20 transition">
+              <FaApple size={32} className="text-white" />
+              <span className="text-white font-semibold">Apple</span>
+            </button>
+          </div>
 
-          <p className="text-xs text-center text-gray-500 mt-4">
-            By registering you agree to our <span className="underline">Terms</span> and{' '}
-            <span className="underline">Privacy</span>.
-          </p>
-
-          <div className="mt-4 text-center text-sm">
-            <span className="text-gray-600">Already have an account?</span>{' '}
-            <Link to="/loginpage" className="ml-2 font-medium text-pink-600">
-              Log in
+          <p className="text-center mt-10 text-pink-200 text-sm">
+            Already have an account?{' '}
+            <Link to="/loginpage" className="font-bold text-white hover:underline">
+              Log In
             </Link>
-          </div>
+          </p>
         </div>
       </div>
     </div>

@@ -12,16 +12,10 @@ const stats = [
 const Satisfaction = () => {
   return (
     <div className="relative py-20 my-20">
-      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center w-full h-full"
         style={{ backgroundImage: `url(${image})` }}
       ></div>
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-opacity-40 w-full h-full"></div>
-
-      {/* Content */}
       <div className="relative z-10 w-11/12 mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-pink-600 mb-12">Our Achievements</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

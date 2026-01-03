@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaApple } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../AuthProvider/Authprovider';
@@ -17,17 +17,14 @@ const LoginPage = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-
     signInWithPass(email, password)
       .then(() => {
-        toast.success('Login Successful!')
+        toast.success('Login Successful!');
         navigate('/profile');
         e.target.reset();
         setEmailValue('');
       })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      .catch((error) => toast.error(error.message));
   };
 
   const handleGoogleSignIn = () => {
@@ -38,134 +35,115 @@ const LoginPage = () => {
           email: result.user?.email || '',
           image: result.user?.photoURL || '',
         };
-
         fetch('https://mongodb-server-site.vercel.app/users', {
           method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-          },
+          headers: { 'content-type': 'application/json' },
           body: JSON.stringify(newUser),
         })
-          .then((res) => res.json())
-          .then(() => {
-            navigate('/');
-          })
-          .catch((err) => {
-            toast.error(err.message);
-          });
+          .then(() => navigate('/'))
+          .catch((err) => toast.error(err.message));
       })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      .catch((error) => toast.error(error.message));
   };
 
   const handlePasswordReset = async () => {
     const email = emailValue?.trim();
-    if (!email) {
-      toast.error('Please enter your email in the email field first.');
-      return;
-    }
-
+    if (!email) return toast.error('Please enter your email first.');
     try {
       await resetPassword(email);
-      toast.success('Password reset email sent. Please check your inbox.');
-      try {
-        window.open('https://mail.google.com', '_blank');
-      } catch {}
+      toast.success('Password reset email sent!');
     } catch (error) {
       toast.error(error.message || 'Failed to send reset email.');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
-      <div className="w-full max-w-lg">
-        <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-pink-600">
-            Login Here
-          </h1>
+    <div className="min-h-screen flex p-10 items-center justify-center relative overflow-hidden bg-gradient-to-br from-pink-500 via-purple-600 to-pink-700">
+      {/* Floating blur orbs - Dribbble style particles */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 left-10 w-80 h-80 bg-pink-400 rounded-full blur-3xl opacity-50 animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-40 animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-pink-600 rounded-full blur-3xl opacity-30" />
+      </div>
 
-          <form onSubmit={handleLogIn} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
-              </label>
+      {/* Glassmorphism Card */}
+      <div className="relative z-10 w-full max-w-lg mx-4">
+        <div className="backdrop-blur-2xl bg-white/15 border border-white/20 rounded-3xl shadow-2xl p-10 sm:p-12">
+          <div className="text-center mb-10">
+            <h1 className="text-5xl font-black text-white mb-3">Sign In</h1>
+            <p className="text-pink-100 text-lg">Welcome back to your account</p>
+          </div>
+
+          <form onSubmit={handleLogIn} className="space-y-7">
+            <input
+              type="email"
+              name="email"
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-300/50 focus:bg-white/20 transition"
+            />
+
+            <div className="relative">
               <input
-                id="email"
-                type="email"
-                name="email"
-                value={emailValue}
-                onChange={(e) => setEmailValue(e.target.value)}
-                placeholder="you@example.com"
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Enter your password"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
+                className="w-full px-6 py-5 bg-white/10 border border-white/30 rounded-2xl text-white placeholder-pink-200 text-lg pr-16 focus:outline-none focus:ring-4 focus:ring-pink-300/50 focus:bg-white/20 transition"
               />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  placeholder="Enter your password"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl pr-12 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
-                </button>
-              </div>
-
-              <p className="text-sm text-center text-gray-500 mt-4">
-                Forgot your password?{' '}
-                <Link
-                  to="/forgetpassword"
-                  type="button"
-                  onClick={handlePasswordReset}
-                  className="underline text-pink-600 font-semibold"
-                >
-                  Reset here
-                </Link>
-              </p>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-pink-200 hover:text-white text-2xl"
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
             </div>
 
             <button
+              type="button"
+              onClick={handlePasswordReset}
+              className="text-pink-200 hover:text-white text-sm font-medium underline-offset-4 hover:underline transition"
+            >
+              Forgot password?
+            </button>
+
+            <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition duration-200"
+              className="w-full py-5 bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold text-xl rounded-2xl shadow-xl hover:shadow-pink-500/60 transform hover:scale-105 hover:from-pink-600 hover:to-pink-700 transition-all duration-300"
             >
               Log In
             </button>
           </form>
 
-          <div className="my-4 flex items-center gap-2">
-            <hr className="flex-1 border-gray-300" />
-            <span className="text-sm text-gray-400">or</span>
-            <hr className="flex-1 border-gray-300" />
+          <div className="my-10 flex items-center">
+            <div className="flex-1 h-px bg-white/30" />
+            <span className="px-6 text-pink-200 font-medium">or continue with</span>
+            <div className="flex-1 h-px bg-white/30" />
           </div>
 
-          <button
-            onClick={handleGoogleSignIn}
-            className="w-full py-3 border rounded-xl flex items-center justify-center gap-2 font-medium hover:bg-gray-50 transition duration-200"
-          >
-            <FcGoogle size={22} />
-            <span>Login with Google</span>
-          </button>
+          <div className="grid grid-cols-2 gap-5">
+            <button
+              onClick={handleGoogleSignIn}
+              className="py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center gap-4 hover:bg-white/20 transition"
+            >
+              <FcGoogle size={28} />
+              <span className="text-white font-semibold">Google</span>
+            </button>
+            <button className="py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center gap-4 hover:bg-white/20 transition">
+              <FaApple size={32} className="text-white" />
+              <span className="text-white font-semibold">Apple</span>
+            </button>
+          </div>
 
-          <div className="mt-4 text-center text-sm">
-            <span className="text-gray-600">Don't have an account?</span>{' '}
-            <Link to="/registerpage" className="ml-2 font-medium text-pink-600">
-              Register
+          <p className="text-center mt-10 text-pink-200">
+            New here?{' '}
+            <Link to="/registerpage" className="font-bold text-white hover:underline">
+              Create an account
             </Link>
-          </div>
+          </p>
         </div>
       </div>
     </div>

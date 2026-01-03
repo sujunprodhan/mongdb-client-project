@@ -4,64 +4,136 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="relative mt-10 bg-gray-900 text-white">
+    <footer className="relative mt-20 overflow-hidden">
+      {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1770&q=80')`,
+          backgroundImage: `url('https://img.freepik.com/free-photo/light-trails-buildings_1359-715.jpg?semt=ais_hybrid')`, // Modern city night view
         }}
-      ></div>
+      />
 
-      <div className="relative max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        <div className="flex flex-col items-start gap-4">
-          <img src={logo} alt="Logo" className="h-12 w-auto bg-pink-600 p-1 rounded-md" />
-          <h2 className="text-xl font-bold text-white">Your Website Name</h2>
-          <p className="text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} All Rights Reserved
-          </p>
-        </div>
+      {/* Dark Overlay with Pink Tint for Text Visibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
 
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white">Contact Us</h3>
-          <ul className="text-gray-300 space-y-2 text-sm">
-            <li>Phone: +880 1234 567 890</li>
-            <li>Email: info@yourwebsite.com</li>
-            <li>Address: 123, Street, City, Country</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white">Legal</h3>
-          <ul className="text-gray-300 space-y-2 text-sm">
-            <li>
-              <a href="/terms" className="hover:text-[#E60076] transition">
-                Terms & Conditions
-              </a>
-            </li>
-            <li>
-              <a href="/privacy" className="hover:text-[#E60076] transition">
-                Privacy Policy
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white">Follow Us</h3>
-          <div className="flex gap-4 text-[#E60076] text-xl">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <FaFacebookF />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FaTwitter />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FaInstagram />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-              <FaLinkedinIn />
-            </a>
+      {/* Main Footer Content */}
+      <div className="relative max-w-7xl mx-auto px-6 py-16 text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Logo & Company Info */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-14 w-auto bg-pink-600 p-2 rounded-lg shadow-lg"
+              />
+              <h2 className="text-2xl font-black">Your Real Estate</h2>
+            </div>
+            <p className="text-gray-300 leading-relaxed max-w-xs">
+              Leading real estate platform connecting buyers and sellers with premium properties
+              worldwide.
+            </p>
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} All Rights Reserved
+            </p>
           </div>
+
+          {/* Contact Us */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 border-b-2 border-pink-500 inline-block pb-2">
+              Contact Us
+            </h3>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex items-center gap-3">
+                <span className="text-pink-400">📞</span> +880 1234 567 890
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-pink-400">✉️</span> info@yourrealestate.com
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-pink-400">📍</span> 123 Luxury Street, Dhaka, Bangladesh
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 border-b-2 border-pink-500 inline-block pb-2">
+              Legal
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="/terms"
+                  className="text-gray-300 hover:text-pink-400 transition duration-300"
+                >
+                  Terms & Conditions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy"
+                  className="text-gray-300 hover:text-pink-400 transition duration-300"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/disclaimer"
+                  className="text-gray-300 hover:text-pink-400 transition duration-300"
+                >
+                  Disclaimer
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Follow Us */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 border-b-2 border-pink-500 inline-block pb-2">
+              Follow Us
+            </h3>
+            <div className="flex gap-5 text-2xl">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-full hover:bg-pink-600 hover:scale-110 transition duration-300"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-full hover:bg-pink-600 hover:scale-110 transition duration-300"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-full hover:bg-pink-600 hover:scale-110 transition duration-300"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-full hover:bg-pink-600 hover:scale-110 transition duration-300"
+              >
+                <FaLinkedinIn />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-white/20 text-center text-gray-400 text-sm">
+          Designed with ❤️ for modern real estate experiences
         </div>
       </div>
     </footer>

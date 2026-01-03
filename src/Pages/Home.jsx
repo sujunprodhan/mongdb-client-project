@@ -2,31 +2,37 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+import { Autoplay, EffectFade } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import LatestProperty from './LatestProperty/LatestProperty';
 import WhyChooseUs from '../Componets/WhyChooseUs';
 import HowItWorks from '../Componets/HowItWorks';
-import LatestProperty from './LatestProperty/LatestProperty';
 import BrandMarquee from './My ProPertise/BrandMarquee';
-import slider1 from '../assets/project_img_1.jpg';
-import slider2 from '../assets/project_img_2.jpg';
-import slider3 from '../assets/project_img_3.jpg';
+import FaqSection from './My ProPertise/FAQSection';
+import Newsletter from './My ProPertise/Newsletter';
 
 const slides = [
   {
     id: 1,
-    title: 'Welcome to Our Real Estate',
-    subtitle: 'Find your dream property today',
-    image: slider1,
+    title: 'Welcome to Premium Real Estate',
+    subtitle: 'Discover your dream property with confidence',
+    image:
+      'https://mbluxury1.s3.amazonaws.com/2024/02/01151752/luxury-real-estate-website-design-scaled.jpg',
   },
-  { id: 2, title: 'Exclusive Properties', subtitle: 'Best deals available now', image: slider2 },
+  {
+    id: 2,
+    title: 'Exclusive Luxury Properties',
+    subtitle: 'Handpicked villas, apartments & prime locations',
+    image:
+      'https://i0.wp.com/picjumbo.com/wp-content/uploads/luxury-villa-in-bali-above-a-flowing-river-and-waterfall-free-photo.jpeg?w=2000&quality=80',
+  },
   {
     id: 3,
     title: 'Trusted by Thousands',
-    subtitle: 'Your satisfaction is our priority',
-    image: slider3,
+    subtitle: 'Your satisfaction is our top priority',
+    image:
+      'https://thumbs.dreamstime.com/b/elegant-modern-home-exterior-multi-car-garage-landscaped-lawn-twilight-luxury-property-features-stucco-stone-accents-398569527.jpg',
   },
 ];
 
@@ -34,14 +40,19 @@ const Home = () => {
   const latestProperty = useLoaderData();
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        loop
-        className="w-full h-[60vh] md:h-[80vh] lg:h-[90vh]"
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        autoplay={{
+          delay: 7000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        speed={2200}
+        allowTouchMove={false}
+        className="w-full h-screen"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -49,54 +60,82 @@ const Home = () => {
               className="h-full bg-cover bg-center relative flex items-center justify-center"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40" />
+              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 opacity-30 pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-400 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000" />
+              </div>
               <motion.div
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="relative z-10 text-center px-4 max-w-3xl"
+                exit={{ opacity: 0, y: -60 }}
+                transition={{ duration: 1.6, ease: 'easeInOut' }}
+                className="relative z-10 text-center px-6 max-w-5xl"
               >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-pink-600 mb-4">
-                  {slide.title}
-                </h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 50 }}
+                <motion.h2
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="text-base sm:text-lg md:text-2xl text-white mb-6"
+                  transition={{ delay: 0.5, duration: 1.4 }}
+                  className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl"
+                >
+                  {slide.title}
+                </motion.h2>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9, duration: 1.4 }}
+                  className="text-xl md:text-2xl text-pink-100 mb-12 max-w-3xl mx-auto drop-shadow-lg font-light"
                 >
                   {slide.subtitle}
                 </motion.p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-pink-600 text-white px-5 py-2 sm:px-6 sm:py-3 rounded font-semibold shadow-lg text-sm sm:text-base"
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.4, duration: 1 }}
                 >
-                  Explore Now
-                </motion.button>
+                  <button className="px-10 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-bold rounded-full shadow-2xl hover:shadow-pink-500/60 hover:scale-105 transition-all duration-500">
+                    Explore Now
+                  </button>
+                </motion.div>
               </motion.div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <div className="w-11/12 mx-auto mt-10 md:mt-20">
-        <h1 className="text-3xl font-bold text-center mb-5">
-          Latest <span className="text-pink-600"> Product </span>
-        </h1>
-      </div>
+      {/* Latest Properties Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-black text-gray-900">
+            Latest{' '}
+            <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+              Properties
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 mt-4">Curated premium listings updated daily</p>
+        </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-11/12 mx-auto mb-10">
-        {latestProperty?.map((latest) => (
-          <LatestProperty key={latest._id} latest={latest} />
-        ))}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-11/12 max-w-7xl mx-auto">
+          {latestProperty?.map((latest) => (
+            <LatestProperty key={latest._id} latest={latest} />
+          ))}
+        </div>
+      </section>
 
       <WhyChooseUs />
       <HowItWorks />
-
-      <div className="mt-10 mb-10">
+      <div className="py-10 bg-gray-50">
         <BrandMarquee />
+      </div>
+      <div>
+        <Newsletter></Newsletter>
       </div>
     </div>
   );

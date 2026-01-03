@@ -19,8 +19,6 @@ const Profile = () => {
             style={{ borderColor: '#EF2369' }}
           />
         </div>
-
-        {/* Name */}
         <h1 className="text-2xl font-semibold text-gray-800">{user.displayName}</h1>
 
         {/* Email */}
