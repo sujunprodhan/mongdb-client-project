@@ -17,6 +17,7 @@ import Profile from '../Pages/Profile';
 import ForgetPassword from '../Componets/ForgetPassword';
 import Dashboard from '../Pages/DashboardLayouts/Dashboard';
 import About from '../Pages/AboutSection/About';
+import ContactPage from '../Pages/ContactPage/ContactPage';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: '/about',
         element: <About></About>,
+      },
+      {
+        path: '/contactpage',
+        element:<ContactPage></ContactPage>
       },
       {
         path: '/allpropertise',

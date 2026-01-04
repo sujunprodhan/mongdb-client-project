@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/Authprovider';
 import { toast } from 'react-toastify';
-import { motion } from 'framer-motion'; // ← Ei line ta add koro
+import { motion } from 'framer-motion';
+import addpropertise from '../../assets/addproperty.webp';
 
 export default function AddPropertise() {
   const { user } = useContext(AuthContext);
@@ -39,15 +40,17 @@ export default function AddPropertise() {
   };
 
   return (
-    <div className="min-h-screen py-20 relative overflow-hidden bg-gradient-to-br from-pink-600 via-purple-700 to-pink-800">
-      {/* Background Blur Orbs */}
+    <div
+      className="p-10 inset-0 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${addpropertise})` }}
+    >
+      {/* Blur Orbs */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <div className="absolute top-10 left-10 w-96 h-96 bg-pink-400 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Title Animation - ekhon kaj korbe */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,16 +58,13 @@ export default function AddPropertise() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Add New Property</h2>
-          <p className="text-xl text-pink-100">List your property with premium visibility</p>
+          <p className="text-xl text-white">List your property with premium visibility</p>
         </motion.div>
-
-        {/* Two-Column Form */}
         <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-8 md:p-12">
           <form onSubmit={hadleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Column 1 */}
             <div className="space-y-6">
               <div>
-                <label className="block text-white font-semibold mb-2">Property Title</label>
+                <label className="block text-pink-600 font-semibold mb-2">Property Title</label>
                 <input
                   type="text"
                   name="title"
@@ -75,74 +75,74 @@ export default function AddPropertise() {
               </div>
 
               <div>
-                <label className=" text-white font-semibold">Category</label>
+                <label className="block text-pink-600 font-semibold mb-2">Category</label>
                 <select
                   name="category"
                   required
-                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition"
+                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white focus:outline-none focus:ring-4 focus:ring-pink-400 transition"
                 >
-                  <option value="" className="text-gray-800">
+                  <option value="" className="text-pink-600">
                     Select Category
                   </option>
-                  <option value="House" className="text-gray-800">
+                  <option value="House" className="text-pink-600">
                     House
                   </option>
-                  <option value="Apartment" className="text-gray-800">
+                  <option value="Apartment" className="text-pink-600">
                     Apartment
                   </option>
-                  <option value="Townhouse" className="text-gray-800">
+                  <option value="Townhouse" className="text-pink-600">
                     Townhouse
                   </option>
-                  <option value="Mansion" className="text-gray-800">
+                  <option value="Mansion" className="text-pink-600">
                     Mansion
                   </option>
-                  <option value="Farmhouse" className="text-gray-800">
+                  <option value="Farmhouse" className="text-pink-600">
                     Farmhouse
                   </option>
-                  <option value="Penthouse" className="text-gray-800">
+                  <option value="Penthouse" className="text-pink-600">
                     Penthouse
                   </option>
-                  <option value="Cabin" className="text-gray-800">
+                  <option value="Cabin" className="text-pink-600">
                     Cabin
                   </option>
-                  <option value="Studio" className="text-gray-800">
+                  <option value="Studio" className="text-pink-600">
                     Studio
                   </option>
-                  <option value="Villa" className="text-gray-800">
+                  <option value="Villa" className="text-pink-600">
                     Villa
                   </option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-white font-semibold mb-2">Price (BDT)</label>
+                <label className="block text-pink-600 font-semibold mb-2">Price (BDT)</label>
                 <input
                   type="number"
                   name="price"
                   required
                   placeholder="e.g. 25000000"
-                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-pink-200 focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition"
+                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-400 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-white font-semibold mb-2">Location</label>
+                <label className="block text-pink-600 font-semibold mb-2">Location</label>
                 <input
                   type="text"
                   name="location"
                   required
                   placeholder="e.g. Gulshan-2, Dhaka"
-                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-pink-200 focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition"
+                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-400 transition"
                 />
               </div>
               <div>
-                <label className="block text-white font-semibold mb-2">Image URL</label>
+                <label className="block text-pink-600 font-semibold mb-2">Image URL</label>
                 <input
                   type="url"
                   name="image"
                   required
                   placeholder="https://example.com/property.jpg"
-                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-pink-200 focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition"
+                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-400 transition"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function AddPropertise() {
             {/* Column 2 */}
             <div className="space-y-6">
               <div>
-                <label className="block text-white font-semibold mb-2">Agent Name</label>
+                <label className="block text-pink-600 font-semibold mb-2">Agent Name</label>
                 <input
                   type="text"
                   value={user?.displayName || ''}
@@ -160,7 +160,7 @@ export default function AddPropertise() {
               </div>
 
               <div>
-                <label className="block text-white font-semibold mb-2">Agent Email</label>
+                <label className="block text-pink-600 font-semibold mb-2">Agent Email</label>
                 <input
                   type="email"
                   value={user?.email || ''}
@@ -169,13 +169,13 @@ export default function AddPropertise() {
                 />
               </div>
               <div>
-                <label className="block text-white font-semibold mb-2">Description</label>
+                <label className="block text-pink-600 font-semibold mb-2">Description</label>
                 <textarea
                   name="description"
                   rows="6"
                   required
                   placeholder="Describe your property features, amenities, neighborhood..."
-                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-pink-200 focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition resize-none"
+                  className="w-full px-5 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-400/50 transition resize-none"
                 />
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function AddPropertise() {
             <div className="md:col-span-2 mt-8">
               <button
                 type="submit"
-                className="w-full py-5 bg-linear-to-r from-pink-300 to-purple-600 text-white text-xl font-bold rounded-2xl shadow-2xl hover:shadow-pink-500/50 transition-all duration-500"
+                className="w-full py-5 bg-linear-to-r from-pink-500 to-pink-600 text-white text-xl font-bold rounded-2xl shadow-2xl hover:shadow-pink-500/50 transition-all duration-500"
               >
                 Add Property
               </button>

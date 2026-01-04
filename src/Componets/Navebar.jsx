@@ -76,6 +76,9 @@ const NavBar = () => {
             <NavLink to="/about" className={activeClass}>
               About
             </NavLink>
+            <NavLink to="/contactpage" className={activeClass}>
+              Contact
+            </NavLink>
 
             {user && (
               <>
